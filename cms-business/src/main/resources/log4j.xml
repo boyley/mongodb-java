@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d %-5p [%t] [%c] - %m%n"/>
+        </layout>
+    </appender>
+    
+    <!--appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${jboss.server.home.dir}/log/mall-admin.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH\:mm\:ss} %-5p [%t] [%c] - %m%n" />
+		</layout>
+	</appender-->
+	
+	<appender name="rollingFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="cms.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="200" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH\:mm\:ss} %-5p [%t] [%c] - %m%n" />
+		</layout>
+	</appender>
+
+    <logger name="org">
+        <level value="ERROR"/>
+    </logger>
+
+    <logger name="net">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- added by tanfeng for debug 2012.02.29 -->
+    <!-- logger name="com.yougou.mgmt.b2c.cms.biz.impl">
+        <level value="DEBUG" />
+    </logger -->
+
+    <!-- added by tanfeng for debug 2012.03.03 -->
+    <!-- logger name="com.yougou.mgmt.b2c.promotion.biz.impl">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="org.hibernate">
+        <level value="INFO" />
+    </logger -->
+
+
+    <category name="java.sql">  
+        <priority value="debug" />  
+    </category>  
+	<category name="com.ibatis">  
+        <priority value="debug" />  
+    </category>  
+    <logger name="com.ibatis" additivity="true">
+  		<level value="debug" /> 
+  </logger>
+	
+    <root>
+        <level value="ERROR"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="rollingFile"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.cms.mapper.NavigationMapper" >
+  <resultMap id="BaseResultMap" type="com.yougou.cms.model.Navigation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="navigation_name" property="navigationName" jdbcType="VARCHAR" />
+    <result column="order_sn" property="orderSn" jdbcType="INTEGER" />
+    <result column="deleteflag" property="deleteflag" jdbcType="INTEGER" />
+    <result column="navigation_no" property="navigationNo" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="has_child" property="hasChild" jdbcType="TINYINT" />
+    <result column="link_open_type" property="linkOpenType" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, navigation_name, order_sn, deleteflag, navigation_no, url, has_child, link_open_type, 
+    create_time, color
+  </sql>
+
+</mapper>

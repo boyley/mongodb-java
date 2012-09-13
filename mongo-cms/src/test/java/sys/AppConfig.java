@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * 用来测试系统的配置
  */
@@ -21,6 +25,21 @@ public class AppConfig {
         @Test
        public void testMongodb(){
            //  mongoTemplate.save("{'username':'minxr','age',23}");
-            mongoTemplate.dropCollection("string");
+           // mongoTemplate.dropCollection("string");
+            List<Integer> list = new ArrayList<Integer>();
+            List<Integer> newlist = new ArrayList<Integer>();
+            for(int i=0;i<10;i++){
+                   list.add(i);
+            }
+            Iterator<Integer> iter = list.iterator();
+           while (iter.hasNext()){
+               int temp = iter.next();
+                if(temp%2==0){
+                    iter.remove();
+                    newlist.add(temp);
+                }
+            }
+            list.addAll(newlist);
+            System.out.println(list);
 }
 }
