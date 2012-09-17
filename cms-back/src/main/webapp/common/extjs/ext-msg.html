@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>extjs-demo--来自www.jarorwar.com的教程</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/ext-all.css"/>
+    <script type="text/javascript" src="ext-all-debug.js"></script>
+    <script type="text/javascript" src="locale/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function() {
+           /* var msgBox = Ext.MessageBox;
+            Ext.each(msgBox.msgButtons, function(btn, index){
+                btn.setText(msgBox.buttonText[msgBox.buttonIds[index]]);
+            });
+            //Ext.MessageBox.alert("欢迎","欢迎浏览jarorwar的博客",go);
+//            alert(Ext.MessageBox.YES)
+           // Ext.MessageBox.confirm("确认浏览","您确定要浏览http://jarorwar.com吗？转载要注明出处哦！", go);
+            Ext.MessageBox.prompt("姓名","请输入您的姓名：",function(btn,text){
+               if(btn=='ok'){
+                   alert("您的姓名是:"+text);
+               }else if(btn=="cancel"){
+                   alert("您取消了输入");
+               }
+            });*/
+
+           /* Ext.MessageBox.show({
+                title:"自定义",  //标题
+                msg:"欢迎访问jarorwar的博客",//显示的信息
+                width:300,//宽度
+                multiline:false,//多行文本
+                buttons:Ext.MessageBox.YESNOCANCEL,//按钮 yes  no cancle
+                icon:Ext.MessageBox.WARNING, //设置图标为警告的图片
+                fn:function(bt,text){  //按下按钮要处理的函数
+                    alert(bt);//可以根据按钮进行不同的处理
+                }
+
+            });*/
+
+        });
+
+        function go(btn){
+            if(btn=='yes'){
+                alert('您选择了'+btn+'您可以继续浏览！')
+            }else if(btn=='no'){
+                alert("算了吧 。你走吧！");
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="my-el"></div>
+	<!--<button id="bt">bt</button>
+	<div id='a'>dom node </div>-->
+</body>
+</html>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yougou.cms.mapper.NavigationMapper" >
-    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
-    <resultMap id="NavigationResultMap" type="com.yougou.cms.model.Navigation" >
+<mapper namespace="com.jarorwar.mapper.NavigationMapper" >
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    <resultMap id="NavigationResultMap" type="com.jarorwar.model.Navigation" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="navigation_name" property="navigationName" jdbcType="VARCHAR" />
     <result column="order_sn" property="orderSn" jdbcType="INTEGER" />
@@ -19,8 +19,68 @@
     create_time, color
   </sql>
 
-   <select id="queryNavByQuery" parameterType="com.jarorwar.model.Navigation" resultMap="NavigationResultMap">
-       select   <include refid="Base_Column_List"/> from   jarorwar_cms_navigation
+   <select id="queryByNav" parameterType="com.jarorwar.model.Navigation" resultMap="NavigationResultMap">
+       select   <include refid="Base_Column_List"/> from   tbl_cms_navigation
+       <where>
+           <if test="deleteflag != null">
+               deleteflag = #{deleteflag}
+           </if>
+       </where>
+       order by order_sn asc
    </select>
+    
+    <update id="updateNavigation"  parameterType="com.jarorwar.model.Navigation">
+        update  tbl_cms_navigation
+        <trim>
+            <set>
+                <if test="navigationName !=null and navigationName != ''">
+                     navigation_name = #{navigationName} ,
+                </if>
+                <if test="orderSn !=null">
+                     order_sn = #{orderSn}  ,
+                </if>
+               <!-- <if test="deleteflag !=null">
+                     deleteflag = #{deleteflag},
+                </if>-->
+                <if test="navigationNo !=null">
+                     navigation_no = #{navigationNo} ,
+                </if>
+                <if test="url !=null">
+                     url = #{url} ,
+                </if>
+               <!-- <if test="hasChild !=null">
+                     has_child = #{hasChild},
+                </if>
+                <if test="linkOpenType !=null">
+                     link_open_type = #{linkOpenType} ,
+                </if>-->
+                <if test="createTime !=null">
+                     create_time = #{createTime} ,
+                </if>
+                <if test="color !=null">
+                     color = #{color}
+                </if>
+            </set>
+            where id = #{id}
+        </trim>
+    </update>
+
+    <delete id="deleteNavById" parameterType="string">
+        delete from   tbl_cms_navigation where id = #{id}
+    </delete>
+
+    <insert id="insertNavigation" parameterType="com.jarorwar.model.Navigation">
+        <selectKey databaseId="id" keyProperty="id" order="BEFORE" resultType="string">
+            select REPLACE(UUID(),'-','')
+        </selectKey>
+        insert  into tbl_cms_navigation(
+        id, navigation_name, order_sn, deleteflag, navigation_no, url, has_child, link_open_type,
+        create_time, color
+        )
+        values
+        (#{id}, #{navigationName}, #{orderSn}, #{deleteflag}, #{navigationNo}, #{url},#{hasChild},#{linkOpenType} ,
+        #{createTime},#{color}
+        )
+    </insert>
 
 </mapper>

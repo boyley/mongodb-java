@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>extjs-demo--来自www.jarorwar.com的教程</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/ext-all.css"/>
+    <script type="text/javascript" src="bootstrap.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function() {
+			/**function User(name,sitename,url){//定义一个类
+			    this.name = name;
+				this.sitename=sitename;
+				this.url=url
+			}
+
+			var u = new User('jarorwar','jarorwar\'s blog','http://www.jarorwar.com');//实例化一个类的对象
+			alert(u.name);//访问对象的name属性
+			**/
+			Ext.define('User',{//定义一个类，名称为User
+				extend:"Ext.data.Model",//继承自Model
+				fields:['name','sitename','url']//类所具有的属性，当然可以设置属性类型。默认string
+			});
+			var u = new User({'name':'jarorwar','sitename':'blog','url':'jarorwar.com'});//实例化一个类的对象
+			//var u =Ext.create('User',{'name':'jarorwar','sitename':'blog','url':'jarorwar.com'});
+			alert(u.get('url'))//获取对象属性
+			
+        });
+		
+    </script>
+</head>
+<body>
+	<button id="bt">bt</button>
+	<div id='a'>dom node </div>
+</body>
+</html>

@@ -3,15 +3,14 @@
 
 <configuration>
     <jmxConfigurator/>
-
     <!-- 控制台输出日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </layout>
     </appender>
 
-    <!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)-->
+   <!-- &lt;!&ndash; 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)&ndash;&gt;
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>cms.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
@@ -50,16 +49,17 @@
         </layout>
     </appender>
 
-    <!--这里指定logger name 是为jmx设置日志级别做铺垫 -->
+    &lt;!&ndash;这里指定logger name 是为jmx设置日志级别做铺垫 &ndash;&gt;
     <logger name="com.jarorwar">
         <level value="ERROR"/>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="FILE-ERROR"/>
-    </logger>
-    <logger name="com.jarorwar" level="TRACE"/>
+    </logger>-->
+    <logger name="com.jarorwar" level="debug"/>
+    <logger name="sys" level="debug"/>
 
-    <root level="debug">
+    <root level="error">
         <appender-ref ref="STDOUT"/>
     </root>
 

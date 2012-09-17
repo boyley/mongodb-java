@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>extjs-demo--来自www.jarorwar.com的教程</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/ext-all.css"/>
+    <script type="text/javascript" src="bootstrap.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function() {
+			Blog = function(config){
+				this.blogName='minxr';
+				this.author='minxr';
+				Ext.applyIf(this,config);
+			}
+			//var blog= new Blog({blogName:'jarorwar',author:'jarorwar',url:'http://www.jarorwar.com'});
+			//alert("博客名称:"+blog.blogName+" 作者:"+blog.author+" 主页:"+blog.url)
+			//var o = Ext.get('blog');
+			//alert(o+"====>"+o.getValue());
+			Ext.create('Ext.Button', {
+				text: '我是一个按钮',
+				renderTo: Ext.getBody()
+				
+			});
+			alert(Ext.id('a'));
+			Ext.get('bt').on('click',go);
+
+        });
+		function go(){
+		alert("go");
+		}
+    </script>
+</head>
+<body>
+	<button id="bt">bt</button>
+	<div id='a'>dom node </div>
+</body>
+</html>
