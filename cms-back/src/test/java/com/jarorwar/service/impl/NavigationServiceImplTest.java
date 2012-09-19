@@ -1,6 +1,7 @@
-package com.jarorwar.serviceimpl;
+package com.jarorwar.service.impl;
 
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class NavigationServiceImplTest {
     @Test
     public void testGetNavigationList() throws Exception {
         List<Navigation> navigationList =navigationService.getNavigationList(null) ;
-                Navigation nav = new Navigation();
+        Navigation nav = new Navigation();
         logger.debug("共有{}个导航",navigationList.size());
         nav.setDeleteflag(1);
         List<Navigation> enabledNavigationList =navigationService.getNavigationList(nav)  ;
@@ -55,7 +56,7 @@ public class NavigationServiceImplTest {
 
     @Test
     public void testDeleteNavigationById(){
-         int rs = navigationService.deleteNavigationById("123412341234");
+        int rs = navigationService.deleteNavigationById("123412341234");
         Assert.isTrue(rs == 1);
     }
 
@@ -75,6 +76,34 @@ public class NavigationServiceImplTest {
     }
     @Test
     public void testGetRootNavigationKeywords() throws Exception {
+       List<NavigationKeyword>   kws= navigationService.getRootNavigationKeywords(0, "4028537434b1ffe50134b2266ab7000b");
+      for(NavigationKeyword keyword:kws){
+          System.out.println(keyword);
+      }
+    }
 
+    @Test
+    public void testGetNavigationById(){
+         logger.debug("{}",navigationService.getNavigationById("4028537434b1ffe50134b2266ab7000b"));
+    }
+
+    @Test
+    public void testGetKeyWordById(){                                          //4028537434b285860134b2bcba5c00a6
+      NavigationKeyword  kw=(navigationService.getNavigationKeywordById("2c94812534ecb87f0134ee71740a0002"));
+      //logger.debug("keyword Name: {},keyword parent:{},keyword sub:{}, ",new Object[]{kw.getKeywordName(),kw.getParentKeyword(),kw.getSubKeywords()});
+        if(kw!=null){
+             if(kw.getParentKeyword() !=null){
+                 System.out.println(kw.getParentKeyword().getKeywordName());
+                 System.out.println("   ");
+             }
+            System.out.println("    "+kw.getKeywordName());
+            if(kw.getSubKeywords() != null && kw.getSubKeywords().size()>0){
+                for(NavigationKeyword keyword:kw.getSubKeywords()){
+                    System.out.println("        "+keyword.getKeywordName());
+                }
+            }
+        }else{
+            System.out.println("没有数据！");
+        }
     }
 }

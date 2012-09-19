@@ -1,6 +1,7 @@
 package com.jarorwar.service;
 
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationKeyword;
 
 import java.util.List;
 
@@ -40,4 +41,10 @@ public interface INavigationService {
      * @return
      */
     public int addNavigation(Navigation navigation);
+
+    public Navigation getNavigationById(String id);
+
+    public List<NavigationKeyword> getRootNavigationKeywords(Integer keywordType, String channelId);
+
+    public NavigationKeyword getNavigationKeywordById(String id);
 }

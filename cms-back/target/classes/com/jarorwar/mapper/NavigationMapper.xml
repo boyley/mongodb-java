@@ -19,6 +19,10 @@
     create_time, color
   </sql>
 
+    <select id="getById"  parameterType="string" resultMap="NavigationResultMap">
+        select * from tbl_cms_navigation where id = #{id}
+    </select>
+
    <select id="queryByNav" parameterType="com.jarorwar.model.Navigation" resultMap="NavigationResultMap">
        select   <include refid="Base_Column_List"/> from   tbl_cms_navigation
        <where>

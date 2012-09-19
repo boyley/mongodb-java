@@ -30,4 +30,6 @@ public interface NavigationMapper {
     int deleteNavById(String id);
     
     int insertNavigation(Navigation navigation);
+
+    Navigation getById(String id);
 }

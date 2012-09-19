@@ -1,7 +1,9 @@
 package com.jarorwar.service.impl;
 
+import com.jarorwar.mapper.NavigationKeywordMapper;
 import com.jarorwar.mapper.NavigationMapper;
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class NavigationServiceImpl implements INavigationService {
 
     @Autowired
     private NavigationMapper navigationMapper;
+    @Autowired
+    private NavigationKeywordMapper keywordMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -56,5 +60,38 @@ public class NavigationServiceImpl implements INavigationService {
         Assert.hasText(navigation.getNavigationName(),"导航名称不能为空！");
         navigation.setCreateTime(new Date());
         return navigationMapper.insertNavigation(navigation);
+    }
+
+    @Override
+    public Navigation getNavigationById(String id) {
+        Assert.hasText(id,"导航对象id不能为空");
+        return navigationMapper.getById(id);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<NavigationKeyword> getRootNavigationKeywords(Integer keywordType, String channelId) {
+        return keywordMapper.getRootNavigationKeywords(keywordType,channelId);
+    }
+
+    @Override
+    public NavigationKeyword getNavigationKeywordById(String id) {
+        NavigationKeyword keyword = generateTree(id);
+
+        return generateTree(id);
+    }
+
+    private NavigationKeyword generateTree(String id){
+        NavigationKeyword keyword =      keywordMapper.selectByPrimaryKey(id);
+        List<NavigationKeyword> subList = keywordMapper.selectByParentId(id);
+        keyword.setSubKeywords(subList);
+        if(subList !=null && subList.size()>0){
+            for(NavigationKeyword kw :subList){
+                if(kw != null){
+                    generateTree(kw.getId());
+                }
+            }
+        }
+        return keyword;
     }
 }
