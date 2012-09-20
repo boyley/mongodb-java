@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.List;
 
 public class NavigationKeyword implements Serializable{
-    public static final Byte KEYWORD_TYPE_KEYWORD = 0;
+    public static final Integer KEYWORD_TYPE_KEYWORD = 0;
 
-    public static final Byte KEYWORD_TYPE_CAT = 1;
+    public static final Integer KEYWORD_TYPE_CAT = 1;
     private String id;
 
     private String url;
 
-    private String navigationId;
+    private Navigation navigation;
 
-    private Byte orderSn;
+    private Integer orderSn;
 
-    private Byte isDisplay;
+    private Integer isDisplay;
 
     private Date createTime;
 
@@ -26,9 +26,9 @@ public class NavigationKeyword implements Serializable{
     /**
      * 关键字类型：0 - 关键字; 1 - 分类
      */
-    private Byte keywordType;
+    private Integer keywordType;
 
-    private Byte linkOpenType;
+    private Integer linkOpenType;
 
     private String keywordName;
 
@@ -50,28 +50,28 @@ public class NavigationKeyword implements Serializable{
         this.url = url;
     }
 
-    public String getNavigationId() {
-        return navigationId;
+    public Navigation getNavigation() {
+        return navigation;
     }
 
-    public void setNavigationId(String navigationId) {
-        this.navigationId = navigationId;
+    public void setNavigation(Navigation navigation) {
+        this.navigation = navigation;
     }
 
-    public Byte getOrderSn() {
+    public Integer getOrderSn() {
         return orderSn;
     }
 
-    public void setOrderSn(Byte orderSn) {
+    public void setOrderSn(Integer orderSn) {
         this.orderSn = orderSn;
     }
 
-    public Byte getIsDisplay() {
+    public Integer getDisplay() {
         return isDisplay;
     }
 
-    public void setIsDisplay(Byte isDisplay) {
-        this.isDisplay = isDisplay;
+    public void setDisplay(Integer display) {
+        isDisplay = display;
     }
 
     public Date getCreateTime() {
@@ -82,19 +82,21 @@ public class NavigationKeyword implements Serializable{
         this.createTime = createTime;
     }
 
-    public Byte getKeywordType() {
+
+
+    public Integer getKeywordType() {
         return keywordType;
     }
 
-    public void setKeywordType(Byte keywordType) {
+    public void setKeywordType(Integer keywordType) {
         this.keywordType = keywordType;
     }
 
-    public Byte getLinkOpenType() {
+    public Integer getLinkOpenType() {
         return linkOpenType;
     }
 
-    public void setLinkOpenType(Byte linkOpenType) {
+    public void setLinkOpenType(Integer linkOpenType) {
         this.linkOpenType = linkOpenType;
     }
 
@@ -135,7 +137,6 @@ public class NavigationKeyword implements Serializable{
         return "NavigationKeyword{" +
                 "id='" + id + '\'' +
                 ", url='" + url + '\'' +
-                ", navigationId='" + navigationId + '\'' +
                 ", orderSn=" + orderSn +
                 ", isDisplay=" + isDisplay +
                 ", createTime=" + createTime +

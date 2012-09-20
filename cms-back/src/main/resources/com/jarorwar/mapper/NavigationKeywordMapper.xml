@@ -4,7 +4,6 @@
   <resultMap id="NavigationKeywordResultMap" type="com.jarorwar.model.NavigationKeyword" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="navigation_id" property="navigationId" jdbcType="VARCHAR" />
     <result column="order_sn" property="orderSn" jdbcType="TINYINT" />
     <result column="is_display" property="isDisplay" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -12,9 +11,10 @@
     <result column="link_open_type" property="linkOpenType" jdbcType="TINYINT" />
     <result column="keyword_name" property="keywordName" jdbcType="VARCHAR" />
     <result column="color" property="color" jdbcType="VARCHAR" />
-    <!--<association property="parentKeyword" column="parent_id" select="selectByPrimaryKey"/>-->
+    <association property="parentKeyword" column="parent_id" select="com.jarorwar.mapper.NavigationKeywordMapper.selectByPrimaryKey"/>
+    <association property="navigation" column="navigation_id" select="com.jarorwar.mapper.NavigationMapper.getById"/>
     <collection property="subKeywords" javaType="ArrayList"
-                column="parent_id" ofType="com.jarorwar.model.NavigationKeyword" select="selectByParentId"/>
+                column="parent_id" ofType="com.jarorwar.model.NavigationKeyword" select="com.jarorwar.mapper.NavigationKeywordMapper.selectByParentId"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, url, navigation_id, order_sn, is_display, create_time, parent_id, keyword_type, 
@@ -23,13 +23,13 @@
   <select id="getRootNavigationKeywords" resultMap="NavigationKeywordResultMap">
       select
       <include refid="Base_Column_List" />
-      from tbl_cms_navigation_keyword where parent_id is null and keyword_type = #{keywordType} and   navigation_id = #{navId}
+      from tbl_cms_navigation_keyword where parent_id is null and keyword_type = #{keywordType} and   navigation_id = #{navId} order by order_sn asc
   </select>
   <select id="selectByParentId" resultMap="NavigationKeywordResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from tbl_cms_navigation_keyword
-    where parent_id = #{id,jdbcType=VARCHAR}
+    where parent_id = #{id,jdbcType=VARCHAR}    order by order_sn asc
   </select>
     <select id="selectByPrimaryKey" resultMap="NavigationKeywordResultMap" parameterType="java.lang.String" >
     select
@@ -42,23 +42,25 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jarorwar.model.NavigationKeyword" >
-    insert into tbl_cms_navigation_keyword (id, url, navigation_id, 
-      order_sn, is_display, create_time, 
-      parent_id, keyword_type, link_open_type, 
+      <selectKey databaseId="id" keyProperty="id" order="BEFORE" resultType="string">
+          select REPLACE(UUID(),'-','')
+      </selectKey>
+    insert into tbl_cms_navigation_keyword (id, url, navigation_id,
+      order_sn, is_display, create_time,
+      parent_id, keyword_type, link_open_type,
       keyword_name, color)
-    values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{navigationId,jdbcType=VARCHAR}, 
-      #{orderSn,jdbcType=TINYINT}, #{isDisplay,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{parentId,jdbcType=VARCHAR}, #{keywordType,jdbcType=TINYINT}, #{linkOpenType,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{navigation.id,jdbcType=VARCHAR},
+      #{orderSn,jdbcType=TINYINT}, #{isDisplay,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{parentKeyword.id,jdbcType=VARCHAR}, #{keywordType,jdbcType=TINYINT}, #{linkOpenType,jdbcType=TINYINT},
       #{keywordName,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.jarorwar.model.NavigationKeyword" >
-    update tbl_cms_navigation_keyword
+   update tbl_cms_navigation_keyword
     set url = #{url,jdbcType=VARCHAR},
-      navigation_id = #{navigationId,jdbcType=VARCHAR},
+      navigation_id = #{ navigation.id,jdbcType=VARCHAR},
       order_sn = #{orderSn,jdbcType=TINYINT},
       is_display = #{isDisplay,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      parent_id = #{parentId,jdbcType=VARCHAR},
+      parent_id = #{parentKeyword.id,jdbcType=VARCHAR},
       keyword_type = #{keywordType,jdbcType=TINYINT},
       link_open_type = #{linkOpenType,jdbcType=TINYINT},
       keyword_name = #{keywordName,jdbcType=VARCHAR},

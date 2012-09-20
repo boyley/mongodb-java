@@ -1,8 +1,10 @@
 package com.jarorwar.service.impl;
 
+import com.jarorwar.mapper.NavigationBrandMapper;
 import com.jarorwar.mapper.NavigationKeywordMapper;
 import com.jarorwar.mapper.NavigationMapper;
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationBrand;
 import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class NavigationServiceImpl implements INavigationService {
     private NavigationMapper navigationMapper;
     @Autowired
     private NavigationKeywordMapper keywordMapper;
+    @Autowired
+    private NavigationBrandMapper navbrandMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -62,6 +66,7 @@ public class NavigationServiceImpl implements INavigationService {
         return navigationMapper.insertNavigation(navigation);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Navigation getNavigationById(String id) {
         Assert.hasText(id,"导航对象id不能为空");
@@ -74,11 +79,27 @@ public class NavigationServiceImpl implements INavigationService {
         return keywordMapper.getRootNavigationKeywords(keywordType,channelId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public NavigationKeyword getNavigationKeywordById(String id) {
-        NavigationKeyword keyword = generateTree(id);
+       // NavigationKeyword keyword = generateTree(id);
 
-        return generateTree(id);
+        return keywordMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int addNavigationKeyword(NavigationKeyword navigationKeyword) {
+        Assert.notNull(navigationKeyword,"要保存的对象不能为空！");
+        navigationKeyword.setCreateTime(new Date());
+        int rs = keywordMapper.insert(navigationKeyword) ;
+        return rs;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<NavigationBrand> getNavigationBrandByNavigation(String id) {
+        Assert.hasText("id","导航对象的id不能为空！");
+        return navbrandMapper.getNavigationBrandByNavigationId(id);
     }
 
     private NavigationKeyword generateTree(String id){

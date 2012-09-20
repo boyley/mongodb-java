@@ -1,6 +1,7 @@
 package com.jarorwar.service.impl;
 
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationBrand;
 import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
 import org.junit.Test;
@@ -105,5 +106,26 @@ public class NavigationServiceImplTest {
         }else{
             System.out.println("没有数据！");
         }
+    }
+
+    @Test
+    public void testAddKeywords(){
+         NavigationKeyword kw   = new NavigationKeyword();
+        Navigation navigation = navigationService.getNavigationById("1ad22b9a02ed11e2a4d3047d7bb42199");
+        kw.setNavigation(navigation);
+        kw.setDisplay(1);
+        kw.setKeywordName("tesa");
+        kw.setKeywordType(NavigationKeyword.KEYWORD_TYPE_KEYWORD);
+        kw.setLinkOpenType(0);
+        kw.setUrl("/testa.html");
+        navigationService.addNavigationKeyword(kw);
+
+    }
+
+    @Test
+    public void testGetNavigationBrandByNavigation(){
+        List<NavigationBrand> navigationBrands = navigationService.getNavigationBrandByNavigation("4028537434b1ffe50134b2266ab7000b");
+        Assert.isTrue(navigationBrands != null && navigationBrands.size()>0,"没有找到相应的结果!");
+        logger.debug("共有{}个品牌",navigationBrands.size());
     }
 }
