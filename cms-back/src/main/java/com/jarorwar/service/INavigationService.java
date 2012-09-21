@@ -52,4 +52,5 @@ public interface INavigationService {
     public int addNavigationKeyword(NavigationKeyword navigationKeyword);
 
     public List<NavigationBrand> getNavigationBrandByNavigation(String id);
+    List<NavigationBrand> getNavigationBrandWithNavigtion();
 }

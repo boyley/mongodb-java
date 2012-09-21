@@ -102,6 +102,11 @@ public class NavigationServiceImpl implements INavigationService {
         return navbrandMapper.getNavigationBrandByNavigationId(id);
     }
 
+    @Override
+    public List<NavigationBrand> getNavigationBrandWithNavigtion() {
+        return navbrandMapper.getNavigationBrandWithNavigtion();
+    }
+
     private NavigationKeyword generateTree(String id){
         NavigationKeyword keyword =      keywordMapper.selectByPrimaryKey(id);
         List<NavigationKeyword> subList = keywordMapper.selectByParentId(id);

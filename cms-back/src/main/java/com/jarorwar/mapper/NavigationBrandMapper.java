@@ -13,4 +13,6 @@ public interface NavigationBrandMapper {
     int updateByPrimaryKey(NavigationBrand record);
 
     List<NavigationBrand> getNavigationBrandByNavigationId(String navigationId);
+    List<NavigationBrand> getNavigationBrandWithNavigtion();
+
 }

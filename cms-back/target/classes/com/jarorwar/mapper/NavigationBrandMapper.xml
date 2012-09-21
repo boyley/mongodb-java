@@ -16,6 +16,15 @@
     id, navigation_id, brand_id, is_display, order_sn, url, create_time, link_open_type
   </sql>
 
+    <select id="getNavigationBrandWithNavigtion" resultMap="NavigationBrandResultMap">
+		 SELECT
+			nav_brand.*
+			FROM
+				tbl_cms_navigation_brand nav_brand
+	 JOIN tbl_cms_navigation nav ON nav_brand.navigation_id = nav.id
+		ORDER BY
+			nav_brand.order_sn ASC
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="NavigationBrandResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -1,0 +1,24 @@
+Ext.onReady(function(){
+    Ext.QuickTips.init();
+    Ext.Loader.setConfig({
+        enabled:true
+    });
+    Ext.application({
+        name:'AM',//应用名称
+        appFolder:'app',//应用的目录
+        launch:function(){//当前页面加载完成执行的函数
+            Ext.create("Ext.container.Viewport",{
+                layout:'auto',//自动布局
+                items:[
+                    {xtype:'userlist',
+                     title:'Users',
+                     html:'List for users will...'
+                    }
+                ]
+            });
+        },
+        controllers:[
+            'UserController'
+        ]
+    });
+});

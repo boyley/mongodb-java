@@ -126,6 +126,17 @@ public class NavigationServiceImplTest {
     public void testGetNavigationBrandByNavigation(){
         List<NavigationBrand> navigationBrands = navigationService.getNavigationBrandByNavigation("4028537434b1ffe50134b2266ab7000b");
         Assert.isTrue(navigationBrands != null && navigationBrands.size()>0,"没有找到相应的结果!");
+        for(NavigationBrand b:navigationBrands){
+            System.out.println(b.getNavigation());
+        }
         logger.debug("共有{}个品牌",navigationBrands.size());
     }
+    @Test
+    public void testGetNavigationBrandWithNavigtion(){
+        List<NavigationBrand> navigationBrands =   navigationService.getNavigationBrandWithNavigtion();
+        for(NavigationBrand b:navigationBrands){
+            System.out.println(b.getNavigation());
+        }
+    }
+
 }
