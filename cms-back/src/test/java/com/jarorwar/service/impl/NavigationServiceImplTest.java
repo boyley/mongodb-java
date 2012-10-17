@@ -17,13 +17,6 @@ import org.springframework.util.Assert;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 12-9-14
- * Time: 下午5:04
- * To change this template use File | Settings | File Templates.
- */
 @RunWith(SpringJUnit4ClassRunner.class)//指定要使用的测试框架
 @ContextConfiguration({"/applicationContext.xml"})// 指定配置文件的位置,可以配置多个
 @TransactionConfiguration(transactionManager ="transactionManager",defaultRollback = false)
@@ -31,7 +24,6 @@ public class NavigationServiceImplTest {
     private Logger logger = LoggerFactory.getLogger(NavigationServiceImplTest.class);
     @Autowired
     private INavigationService navigationService;
-
     @Test
     public void testGetNavigationList() throws Exception {
         List<Navigation> navigationList =navigationService.getNavigationList(null) ;
@@ -42,7 +34,7 @@ public class NavigationServiceImplTest {
         logger.debug("共有{}个启用的导航",enabledNavigationList.size()) ;
         nav.setDeleteflag(0);
         List<Navigation> disabledNavigationList =navigationService.getNavigationList(nav)  ;
-        logger.debug("共有{}个禁用的导航",disabledNavigationList.size());
+        logger.debug("共有{}个禁用的导航", disabledNavigationList.size());
     }
 
     @Test
@@ -77,26 +69,26 @@ public class NavigationServiceImplTest {
     }
     @Test
     public void testGetRootNavigationKeywords() throws Exception {
-       List<NavigationKeyword>   kws= navigationService.getRootNavigationKeywords(0, "4028537434b1ffe50134b2266ab7000b");
-      for(NavigationKeyword keyword:kws){
-          System.out.println(keyword);
-      }
+        List<NavigationKeyword>   kws= navigationService.getRootNavigationKeywords(0, "4028537434b1ffe50134b2266ab7000b");
+        for(NavigationKeyword keyword:kws){
+            System.out.println(keyword);
+        }
     }
 
     @Test
     public void testGetNavigationById(){
-         logger.debug("{}",navigationService.getNavigationById("4028537434b1ffe50134b2266ab7000b"));
+        logger.debug("{}",navigationService.getNavigationById("4028537434b1ffe50134b2266ab7000b"));
     }
 
     @Test
     public void testGetKeyWordById(){                                          //4028537434b285860134b2bcba5c00a6
-      NavigationKeyword  kw=(navigationService.getNavigationKeywordById("2c94812534ecb87f0134ee71740a0002"));
-      //logger.debug("keyword Name: {},keyword parent:{},keyword sub:{}, ",new Object[]{kw.getKeywordName(),kw.getParentKeyword(),kw.getSubKeywords()});
+        NavigationKeyword  kw=(navigationService.getNavigationKeywordById("2c94812534ecb87f0134ee71740a0002"));
+        //logger.debug("keyword Name: {},keyword parent:{},keyword sub:{}, ",new Object[]{kw.getKeywordName(),kw.getParentKeyword(),kw.getSubKeywords()});
         if(kw!=null){
-             if(kw.getParentKeyword() !=null){
-                 System.out.println(kw.getParentKeyword().getKeywordName());
-                 System.out.println("   ");
-             }
+            if(kw.getParentKeyword() !=null){
+                System.out.println(kw.getParentKeyword().getKeywordName());
+                System.out.println("   ");
+            }
             System.out.println("    "+kw.getKeywordName());
             if(kw.getSubKeywords() != null && kw.getSubKeywords().size()>0){
                 for(NavigationKeyword keyword:kw.getSubKeywords()){
@@ -110,7 +102,7 @@ public class NavigationServiceImplTest {
 
     @Test
     public void testAddKeywords(){
-         NavigationKeyword kw   = new NavigationKeyword();
+        NavigationKeyword kw   = new NavigationKeyword();
         Navigation navigation = navigationService.getNavigationById("1ad22b9a02ed11e2a4d3047d7bb42199");
         kw.setNavigation(navigation);
         kw.setDisplay(1);
@@ -125,7 +117,7 @@ public class NavigationServiceImplTest {
     @Test
     public void testGetNavigationBrandByNavigation(){
         List<NavigationBrand> navigationBrands = navigationService.getNavigationBrandByNavigation("4028537434b1ffe50134b2266ab7000b");
-        Assert.isTrue(navigationBrands != null && navigationBrands.size()>0,"没有找到相应的结果!");
+        Assert.isTrue(navigationBrands != null && navigationBrands.size() > 0, "没有找到相应的结果!");
         for(NavigationBrand b:navigationBrands){
             System.out.println(b.getNavigation());
         }
@@ -138,5 +130,4 @@ public class NavigationServiceImplTest {
             System.out.println(b.getNavigation());
         }
     }
-
 }

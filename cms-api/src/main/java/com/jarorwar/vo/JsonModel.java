@@ -9,10 +9,28 @@ import java.util.List;
  * Time: 下午10:15
  * 请在此处加注释
  */
-public class JsonModel implements Serializable {
+public class JsonModel<T> implements Serializable {
     private String msg;
     private String result;
-    private List<Object> data;
+    private List<T> data;
+    private int total;
+    private List<T> rows;
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public List<T> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
+    }
 
     public String getMsg() {
         return msg;
@@ -30,11 +48,11 @@ public class JsonModel implements Serializable {
         this.result = result;
     }
 
-    public List<Object> getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(List<Object> data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 }

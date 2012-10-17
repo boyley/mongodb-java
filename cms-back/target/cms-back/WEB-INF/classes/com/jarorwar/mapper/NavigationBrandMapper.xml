@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jarorwar.mapper.NavigationBrandMapper">
+  <resultMap id="NavigationBrandResultMap" type="com.jarorwar.model.NavigationBrand">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="brand_id" jdbcType="VARCHAR" property="brand" />
+    <result column="is_display" jdbcType="INTEGER" property="isDisplay" />
+    <result column="order_sn" jdbcType="INTEGER" property="orderSn" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="link_open_type" jdbcType="TINYINT" property="linkOpenType" />
+    <association property="navigation"  column="navigation_id" select="com.jarorwar.mapper.NavigationMapper.getById"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, navigation_id, brand_id, is_display, order_sn, url, create_time, link_open_type
+  </sql>
+
+    <select id="getNavigationBrandWithNavigtion" resultMap="NavigationBrandResultMap">
+		 SELECT
+			nav_brand.*
+			FROM
+				tbl_cms_navigation_brand nav_brand
+	 JOIN tbl_cms_navigation nav ON nav_brand.navigation_id = nav.id
+		ORDER BY
+			nav_brand.order_sn ASC
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="NavigationBrandResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_cms_navigation_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_cms_navigation_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+   <select id="getNavigationBrandByNavigationId" parameterType="string" resultMap="NavigationBrandResultMap">
+       select
+       <include refid="Base_Column_List" />
+       from tbl_cms_navigation_brand where navigation_id = #{navigationId}
+   </select>
+
+  <insert id="insert" parameterType="com.jarorwar.model.NavigationBrand">
+    insert into tbl_cms_navigation_brand (id, navigation_id, brand_id, 
+      is_display, order_sn, url, 
+      create_time, link_open_type)
+    values (#{id,jdbcType=VARCHAR}, #{navigationId,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, 
+      #{isDisplay,jdbcType=INTEGER}, #{orderSn,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{linkOpenType,jdbcType=TINYINT})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.jarorwar.model.NavigationBrand">
+    update tbl_cms_navigation_brand
+    <set>
+      <if test="navigationId != null">
+        navigation_id = #{navigationId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null">
+        is_display = #{isDisplay,jdbcType=INTEGER},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkOpenType != null">
+        link_open_type = #{linkOpenType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jarorwar.model.NavigationBrand">
+    update tbl_cms_navigation_brand
+    set navigation_id = #{navigationId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=INTEGER},
+      order_sn = #{orderSn,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      link_open_type = #{linkOpenType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
