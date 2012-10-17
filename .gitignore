@@ -7,5 +7,7 @@
 *.iml
 *.ipr
 *.iws
-/*.gitignore
+*.gitignore
 *.log
+*.ipr
+*.iws
