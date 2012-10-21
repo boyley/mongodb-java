@@ -162,13 +162,19 @@ function tabClose()
 	})
 	/*为选项卡绑定右键*/
 	$(".tabs-inner").bind('contextmenu',function(e){
+        var subtitle =$(this).children(".tabs-closable").text();
 		$('#mm').menu('show', {
 			left: e.pageX,
 			top: e.pageY
 		});
-
-		var subtitle =$(this).children(".tabs-closable").text();
-
+        $('#close').css({"display":"none"});
+        $('#refresh').css({"display":"none"});
+        $('#closeleft').css({"display":"none"});
+        if(subtitle != ''){
+            $('#close').css({"display":"block"});
+            $('#refresh').css({"display":"block"});
+            $('#closeleft').css({"display":"block"});
+        }
 		$('#mm').data("currtab",subtitle);
 		$('#tabs').tabs('select',subtitle);
 		return false;
@@ -200,7 +206,6 @@ function closeTab(action)
 
     switch (action) {
         case "refresh":
-            alert('refresh');
             var iframe = $(currentTab.panel('options').content);
             var src = iframe.attr('src');
             $('#tabs').tabs('update', {

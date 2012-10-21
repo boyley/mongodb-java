@@ -30,7 +30,7 @@
 	font-size:1px;
 	display:none;
 	cursor:pointer;
-	background:#efefef url('images/tabs_leftarrow.png') no-repeat 1px 5px;
+	background:#efefef url('images/tabs_leftarrow.png') no-repeat center center;
 }
 .tabs-scroller-right{
 	position:absolute;
@@ -43,7 +43,7 @@
 	font-size:1px;
 	display:none;
 	cursor:pointer;
-	background:#efefef url('images/tabs_rightarrow.png') no-repeat 2px 5px;
+	background:#efefef url('images/tabs_rightarrow.png') no-repeat center center;
 }
 .tabs-tool{
 	position:absolute;
@@ -82,6 +82,10 @@
 	margin-left:18px;
 	margin-right:18px;
 }
+.tabs-disabled{
+	opacity:0.3;
+	filter:alpha(opacity=30);
+}
 .tabs{
 	list-style-type:none;
 	height:26px;
@@ -100,10 +104,9 @@
 	padding:0;
 	position:relative;
 	border:1px solid #D3D3D3;
-	-moz-border-radius-topleft:5px;
-	-moz-border-radius-topright:5px;
-	-webkit-border-top-left-radius:5px;
-	-webkit-border-top-right-radius:5px;
+	-moz-border-radius:5px 5px 0 0;
+	-webkit-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
 }
 .tabs li a.tabs-inner{
 	display:inline-block;
@@ -116,10 +119,9 @@
 	line-height:25px;
 	text-align:center;
 	white-space:nowrap;
-	-moz-border-radius-topleft:5px;
-	-moz-border-radius-topright:5px;
-	-webkit-border-top-left-radius:5px;
-	-webkit-border-top-right-radius:5px;
+	-moz-border-radius:5px 5px 0 0;
+	-webkit-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
 }
 .tabs li a.tabs-inner:hover{
 	background:#fff;

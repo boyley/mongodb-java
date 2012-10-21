@@ -32,4 +32,9 @@ public class NavigationController {
         jm.setRows(navigationList);
         return jm;
     }
+
+    @RequestMapping("/save_nav")
+    public void saveNav(Navigation navigation){
+        System.out.println(navigation);
+    }
 }

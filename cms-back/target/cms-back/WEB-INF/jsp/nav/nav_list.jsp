@@ -3,17 +3,21 @@
 <html>
 <head>
     <title>导航管理</title>
-    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
-    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.edatagrid.js"></script>
+    <%@ include file="/common/easyui.jsp"%>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css" />
+    <script type="text/javascript" src="<%=basePath%>js/plugins/jquery.edatagrid.js"></script>
+
 </head>
-<body>
-<table id="dg" title="导航列表"
-       toolbar="#toolbar" pagination="true" idField="id"
-       rownumbers="true" fitColumns="true" singleSelect="true">
+<body style="padding-bottom:0px;">
+<table id="dg" title="导航列表"   class="easyui-datagrid"     style="margin:10px;"
+       toolbar="#toolbar" pagination="true" idField="id"   fit="true"
+       rownumbers="true" fitColumns="true" singleSelect="true"   data-options="
+                rowStyler: function(index,row){
+                    if (row.deleteflag == 0){
+                        return 'background-color:#ffffff;color:#dddddd;';
+                    }
+                }
+            ">
     <thead>
     <tr>
         <th field="navigationName" width="20" editor="{type:'validatebox',options:{required:true}}">导航名称</th>
@@ -24,7 +28,7 @@
         <th field="hasChild" width="20" editor="{type:'validatebox',options:{required:true}}">是否有子导航</th>
         <th field="createTime" width="20" editor="{type:'validatebox',options:{required:true}}">创建时间</th>
         <th field="linkOpenType" width="20" editor="{type:'validatebox',options:{required:true}}">打开类型</th>
-        <th field="color" width="20" editor="{type:'validatebox',options:{required:true}}">导航文本颜色RGB值</th>
+        <th field="color" width="20" editor="{type:'validatebox',options:{required:false}}">导航文本颜色RGB值</th>
     </tr>
     </thead>
 </table>
@@ -41,6 +45,20 @@
             saveUrl: 'save_user.php',
             updateUrl: 'update_user.php',
             destroyUrl: 'destroy_user.php'
+        });
+        //设置分页控件
+        var p = $('#dg').datagrid('getPager');
+        $(p).pagination({
+            pageSize: 10,//每页显示的记录条数，默认为10
+            pageList: [5,10,15],//可以设置每页记录条数的列表
+            beforePageText: '第',//页数文本框前显示的汉字
+            afterPageText: '页    共 {pages} 页',
+            displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+            /*onBeforeRefresh:function(){
+             $(this).pagination('loading');
+             alert('before refresh');
+             $(this).pagination('loaded');
+             }*/
         });
     });
 </script>
