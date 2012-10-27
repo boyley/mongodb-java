@@ -55,4 +55,8 @@ public class JsonModel<T> implements Serializable {
     public void setData(List<T> data) {
         this.data = data;
     }
+    public static class  JsonResult{
+        public static final String FAILED ="failed";
+        public static final String SUCCESS ="success";
+    }
 }

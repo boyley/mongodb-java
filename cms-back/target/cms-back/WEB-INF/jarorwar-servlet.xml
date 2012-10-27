@@ -78,17 +78,17 @@
         <property name="suffix" value=".ftl"/>
     </bean>-->
 
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+   <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <!--<prop key="com.shopin.modules.security.exception.UnLoginException">login</prop>-->
+                &lt;!&ndash;<prop key="com.shopin.modules.security.exception.UnLoginException">login</prop>&ndash;&gt;
                 <prop key="org.springframework.web.servlet.PageNotFound">pageNotFound</prop>
                 <prop key="org.springframework.dao.DataAccessException">dataAccessFailure</prop>
                 <prop key="org.springframework.transaction.TransactionException">dataAccessFailure</prop>
                 <prop key="java.lang.IllegalArgumentException">pageNotFound</prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
 
    <!-- <bean id="securityInterceptor" class="com.shopin.modules.security.interceptor.MethodSecurityInterceptor"
           destroy-method="destroy">

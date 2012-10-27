@@ -18,7 +18,7 @@ public interface INavigationService {
      * @param navigation 导航对象，主要是复用查询
      * @return
      */
-    public List<Navigation> getNavigationList(Navigation navigation);
+    public List<Navigation> getNavigationList(Navigation navigation) throws Exception;
 
     /**
      *  更新一个Navigation
@@ -27,23 +27,23 @@ public interface INavigationService {
      * @param navigation
      * @return
      */
-    public int updateNavigation(Navigation navigation);
+    public int updateNavigation(Navigation navigation) throws Exception;
 
     /**
      * 按id删除一个频道
      * @param id
      * @return
      */
-    public int deleteNavigationById(String id);
+    public int deleteNavigationById(String id) throws Exception;
 
     /**
      * 添加一个导航
      * @param navigation
      * @return
      */
-    public int addNavigation(Navigation navigation);
+    public int addNavigation(Navigation navigation) throws Exception;
 
-    public Navigation getNavigationById(String id);
+    public Navigation getNavigationById(String id) throws Exception;
 
     public List<NavigationKeyword> getRootNavigationKeywords(Integer keywordType, String channelId);
 
@@ -53,4 +53,13 @@ public interface INavigationService {
 
     public List<NavigationBrand> getNavigationBrandByNavigation(String id);
     List<NavigationBrand> getNavigationBrandWithNavigtion();
+
+    /**
+     * 启用或者禁用导航
+     * @param id
+     * @param deleteFlag
+     * @return
+     */
+    int changeNavDeleteFlag(String id,Integer deleteFlag) throws Exception;
+
 }

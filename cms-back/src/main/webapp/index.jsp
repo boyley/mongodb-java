@@ -1,12 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/common/easyui.jsp"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>网站后台管理系统</title>
-    <link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src='<%=basePath%>js/index.js?tm=<%=Math.random()%>'> </script>
+<link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/icon.css" />
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src='<%=basePath%>js/index.js?tm=<%=Math.random()%>'> </script>
 <script type="text/javascript">
+
 var _menus = {
     "menus": [{
         "menuid": "1",
@@ -174,6 +182,7 @@ var _menus = {
                 }]
         }]
 };
+
 //设置登录窗口
 function openPwd() {
     $('#w').window({
@@ -246,42 +255,46 @@ $(function() {
 });
 
 
+
 </script>
+
 </head>
 <body class="easyui-layout" style="overflow-y: hidden"  fit="true"   scroll="no">
 <noscript>
-<div style=" position:absolute; z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
-    <img src="images/noscript.gif" alt='抱歉，请开启脚本支持！' />
-</div></noscript>
+    <div style=" position:absolute; z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
+        <img src="images/noscript.gif" alt='抱歉，请开启脚本支持！' />
+    </div></noscript>
+
 <div id="loading-mask" style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
     <div id="pageloading" style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
         <img src="images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
 </div>
 
-<div region="north" split="false" border="true" style="overflow: hidden; height: 30px;
+<div region="north" split="true" border="false" style="overflow: hidden; height: 30px;
         background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
-    <span style="float:right; padding-right:20px;" class="head">欢迎 jarowar <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
-    <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> 网站后台管理系统</span>
+    <span style="float:right; padding-right:20px;" class="head">欢迎 闵晓荣(jarorwar) <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
+    <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> 电子商务后台管理系统</span>
+</div>
+<div region="south" split="true" style="height: 30px; background: #D2E0F2; ">
+    <div class="footer">版权归 jarorwar 所有@2009--2012</div>
 </div>
 <div region="west" split="true"  title="导航菜单" style="width:180px;" id="west">
     <div id="nav">
         <!--  导航内容 -->
+
     </div>
+
 </div>
-<div region="south" split="false" style="height: 30px; background: #D2E0F2; ">
-    <div class="footer">jarorwar-cms</div>
-</div>
-<div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden;">
+<div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
     <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
         <div title="欢迎使用" style="padding:20px;overflow:hidden; color:red; " >
-            <h1 style="font-size:24px;">Jarowar-CMS</h1>
-            <h1 style="font-size:24px;">* BLOG: <a style="font-size:24px;color:green;" href="http://www.jarorwar.com">闵晓荣博客</a></h1>
-            <h1 style="font-size:24px;">* 专业网站开发</h1>
-            <h1 style="font-size:24px;">* 首页了</h1>
+            <a href="http://www.jarorwar.com" target="_blank">我的博客</a>
         </div>
     </div>
 </div>
+
+
 <!--修改密码窗口-->
 <div id="w" class="easyui-window" title="修改密码" collapsible="false" minimizable="false"
      maximizable="false" icon="icon-save"  style="width: 300px; height: 150px; padding: 5px;
@@ -318,6 +331,7 @@ $(function() {
     <div class="menu-sep"></div>
     <div id="exit">退出</div>
 </div>
+
 
 </body>
 </html>

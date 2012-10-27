@@ -43,9 +43,7 @@
                 <if test="orderSn !=null">
                      order_sn = #{orderSn}  ,
                 </if>
-               <!-- <if test="deleteflag !=null">
-                     deleteflag = #{deleteflag},
-                </if>-->
+
                 <if test="navigationNo !=null">
                      navigation_no = #{navigationNo} ,
                 </if>
@@ -86,5 +84,9 @@
         #{createTime},#{color}
         )
     </insert>
-
+    <update id="changeNavDeleteFlag" parameterType="java.lang.Object">
+           update tbl_cms_navigation
+            set deleteflag = #{deleteflag}
+        where id = #{id,jdbcType=VARCHAR}
+   </update>
 </mapper>

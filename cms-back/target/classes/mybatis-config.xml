@@ -7,11 +7,14 @@
         <setting name="useGeneratedKeys" value="true" /> 
         <setting name="defaultExecutorType" value="REUSE" /> 
     </settings>
-    <plugins>
+   <!-- <plugins>
         <plugin
                 interceptor="com.jarorwar.persistence.mybatis.PaginationInterceptor">
             <property name="dialect" value="mysql" />
         </plugin>
-    </plugins>
+    </plugins>-->
+    <mappers>
+        <mapper resource="com/jarorwar/mapper/NavigationMapper.xml" />
+    </mappers>
 
 </configuration>

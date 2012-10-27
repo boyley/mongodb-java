@@ -48,13 +48,13 @@ public class NavigationServiceImplTest {
     }
 
     @Test
-    public void testDeleteNavigationById(){
+    public void testDeleteNavigationById() throws Exception {
         int rs = navigationService.deleteNavigationById("123412341234");
         Assert.isTrue(rs == 1);
     }
 
     @Test
-    public void testAddNavigation(){
+    public void testAddNavigation() throws Exception {
         Navigation nav = new Navigation();
         nav.setId("123412341234");
         nav.setNavigationName("测试导航");
@@ -76,7 +76,7 @@ public class NavigationServiceImplTest {
     }
 
     @Test
-    public void testGetNavigationById(){
+    public void testGetNavigationById() throws Exception {
         logger.debug("{}",navigationService.getNavigationById("4028537434b1ffe50134b2266ab7000b"));
     }
 
@@ -101,7 +101,7 @@ public class NavigationServiceImplTest {
     }
 
     @Test
-    public void testAddKeywords(){
+    public void testAddKeywords() throws Exception {
         NavigationKeyword kw   = new NavigationKeyword();
         Navigation navigation = navigationService.getNavigationById("1ad22b9a02ed11e2a4d3047d7bb42199");
         kw.setNavigation(navigation);

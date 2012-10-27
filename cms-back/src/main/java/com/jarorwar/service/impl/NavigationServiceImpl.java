@@ -36,7 +36,7 @@ public class NavigationServiceImpl implements INavigationService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Navigation> getNavigationList(Navigation navigation) {
+    public List<Navigation> getNavigationList(Navigation navigation) throws Exception {
         return navigationMapper.queryByNav(navigation);
     }
 
@@ -46,20 +46,20 @@ public class NavigationServiceImpl implements INavigationService {
      * @return
      */
     @Override
-    public int updateNavigation(Navigation navigation) {
+    public int updateNavigation(Navigation navigation) throws Exception {
         Assert.notNull(navigation, "要更新的对象不能为空");
         Assert.hasText(navigation.getId(),"要更新的对象主键不能为空！");
         return navigationMapper.updateNavigation(navigation);
     }
 
     @Override
-    public int deleteNavigationById(String id) {
+    public int deleteNavigationById(String id) throws Exception {
         Assert.hasText(id,"无效的id！");
         return navigationMapper.deleteNavById(StringUtils.trimWhitespace(id));
     }
 
     @Override
-    public int addNavigation(Navigation navigation) {
+    public int addNavigation(Navigation navigation) throws Exception {
         Assert.notNull(navigation,"要添加的导航不能为空");
         Assert.hasText(navigation.getNavigationName(),"导航名称不能为空！");
         navigation.setCreateTime(new Date());
@@ -68,7 +68,7 @@ public class NavigationServiceImpl implements INavigationService {
 
     @Transactional(readOnly = true)
     @Override
-    public Navigation getNavigationById(String id) {
+    public Navigation getNavigationById(String id) throws Exception {
         Assert.hasText(id,"导航对象id不能为空");
         return navigationMapper.getById(id);
     }
@@ -105,6 +105,16 @@ public class NavigationServiceImpl implements INavigationService {
     @Override
     public List<NavigationBrand> getNavigationBrandWithNavigtion() {
         return navbrandMapper.getNavigationBrandWithNavigtion();
+    }
+
+
+    @Override
+    public int changeNavDeleteFlag(String id, Integer deleteFlag)throws Exception{
+        Assert.notNull(id,"id must not be null");
+        Assert.notNull(deleteFlag,"deleteflag must not be null");
+        //navigationMapper.getById(id);
+        int rs = navigationMapper.changeNavDeleteFlag(id,deleteFlag);
+        return rs;
     }
 
     private NavigationKeyword generateTree(String id){
