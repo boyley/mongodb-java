@@ -139,6 +139,11 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.caches</groupId>
+            <artifactId>mybatis-ehcache</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
   <build>
     <finalName>cms-back</finalName>

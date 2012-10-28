@@ -270,14 +270,14 @@ $(function() {
         <img src="images/loading.gif" align="absmiddle" /> 正在加载中,请稍候...</div>
 </div>
 
-<div region="north" split="true" border="false" style="overflow: hidden; height: 30px;
+<div region="north" split="false" border="false" style="overflow: hidden; height: 30px;
         background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
-    <span style="float:right; padding-right:20px;" class="head">欢迎 疯狂秀才 <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
-    <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> jQuery.EasyUI- 1.2.6 应用实例</span>
+    <span style="float:right; padding-right:20px;" class="head">欢迎 闵晓荣(jarorwar) <a href="#" id="editpass">修改密码</a> <a href="#" id="loginOut">安全退出</a></span>
+    <span style="padding-left:10px; font-size: 16px; "><img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> 电子商务后台管理系统</span>
 </div>
-<div region="south" split="true" style="height: 30px; background: #D2E0F2; ">
-    <div class="footer">By 疯狂秀才(QQ:1055818239) jQuery.Easy-UI QQ讨论群： 112044258、32994605、36534121、56271061</div>
+<div region="south" split="false" style="height: 30px; background: #D2E0F2; ">
+    <div class="footer">版权归 jarorwar 所有@2009--2012</div>
 </div>
 <div region="west" split="true"  title="导航菜单" style="width:180px;" id="west">
     <div id="nav">

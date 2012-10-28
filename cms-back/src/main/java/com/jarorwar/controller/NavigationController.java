@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +61,22 @@ public class NavigationController  {
     }
 
     @RequestMapping("/save_nav")
-    public void saveNav(Navigation navigation){
-        System.out.println(navigation);
+    @ResponseBody
+    public JsonModel saveNav(Navigation navigation) {
+        JsonModel jm = new JsonModel();
+        try {
+            navigation.setCreateTime(new Date());
+            navigationService.addNavigation(navigation);
+            jm.setMsg("保存成功");
+            jm.setResult(JsonModel.JsonResult.SUCCESS);
+            return jm;
+        } catch (Exception e) {
+            log.error("更新导航失败",e);
+            jm.setMsg("更新失败");
+            jm.setResult(JsonModel.JsonResult.FAILED);
+            return jm ;
+        }
+
     }
 
     @RequestMapping("/update_nav")

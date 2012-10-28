@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>导航管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%@ include file="/common/easyui.jsp"%>
     <script type="text/javascript">
         var data = [
@@ -29,8 +30,13 @@
         }
 
         function deleteById(id){
+            var url ='<%=basePath%>nav/delete.sc';
+            var data={id:id};
             $.getJSON(url,data,function(rs){
-
+                alert(rs.msg);
+                if(rs.result == 'success'){
+                    window.location.reload();
+                }
 
             });
         }
@@ -68,11 +74,66 @@
 </table>
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openWin()">新增</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
+ <%--   <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a>
+--%></div>
+<div id="form_win" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'">
+    <div style="margin:10px">
+        <form id="ff" method="post" action="<%=basePath%>/nav/save_nav.sc">
+            <table>
+                <tr>
+                    <td>导航名称:</td>
+                    <td><input class="easyui-validatebox" type="text" required="true" name="navigationName" data-options="validType:'minLength[1]'" missingMessage="必填内容" /></td>
+                </tr>
+                <tr>
+                    <td>链接地址:</td>
+                    <td><input class="easyui-validatebox" type="text" name="url" data-options="required:true,validType:'url'" invalidMessage="请填写有效的Url地址"  missingMessage="必填内容"/></td>
+                </tr>
+                <tr>
+                    <td>导航编号:</td>
+                    <td><input class="easyui-validatebox" type="text" name="navigationNo" data-options="required:true,validType:'text'" data-options="validType:'minLength[2]'" missingMessage="必填内容"/></td>
+                </tr>
+                <tr>
+                    <td>排序:</td>
+                    <td><input class="easyui-numberspinner" type="text" value="0" name="orderSn" data-options="required:true,min:0,editable:true"/></td>
+                </tr>
+                <tr>
+                    <td>链接打开方式:</td>
+                    <td> <select class="easyui-combobox" name="linkOpenType"><option value="1">原窗口</option><option value="0">新窗口</option></select></td>
+                </tr>
+                <tr>
+                    <td>导航文本颜色RGB值:</td>
+                    <td><input class="easyui-validatebox" type="text" name="color" data-options="required:true,validType:'text'"/></td>
+                </tr>
+                <tr>
+                    <td>是否启用:</td>
+                    <td> <select class="easyui-combobox" name="deleteflag"><option value="1">启用</option><option value="0">禁用</option></select></td>
+
+                </tr>
+              <tr>
+                    <td>是否有子导航:</td>
+                  <td> <select class="easyui-combobox" name="hasChild"><option value=true>有子导航</option><option value=false>无子导航</option></select></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div style="background:#f0f0f0;text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" style="color:#ff0000;" onclick="submitForm()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeWin()">关闭</a>
+    </div>
 </div>
 <script type="text/javascript">
+    $.extend($.fn.validatebox.defaults.rules, {
+        minLength: {
+            validator: function(value, param){
+                var input_value = $.trim(value);
+                return input_value.length >= param[0];
+            },
+            message: '请输入至少{0}个字符.'
+        }
+
+    });
     function formatterUpdate(value ,row){
         if(value != null && $.trim(value) != ''){
             return "<a href='javascript:void(0)' >编辑</a> ";
@@ -111,21 +172,47 @@
         }
     });
     });
-   /* $(function(){
-        var p = $('#dg').datagrid('getPager');
-        $(p).pagination({
-            pageSize: 50,//每页显示的记录条数，默认为10
-//            pageList: [50],//可以设置每页记录条数的列表
-            beforePageText: '第',//页数文本框前显示的汉字
-            afterPageText: '页    共 {pages} 页',
-            displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录'
-            *//*onBeforeRefresh:function(){
-             $(this).pagination('loading');
-             alert('before refresh');
-             $(this).pagination('loaded');
-             }*//*
+    var $win;
+    function openWin(){
+        $win = $('#form_win').window({
+            title:'添加导航',
+            width: 450,
+            height: 318,
+            top:($(window).height() - 400) * 0.5,
+            left:($(window).width() - 500) * 0.5,
+            shadow: true,
+            modal:true,
+            iconCls:'icon-add',
+            closed:true,
+            minimizable:false,
+            maximizable:false,
+            collapsible:false
         });
-    });*/
+
+        $win.window('open');
+    }
+    function closeWin(){ $("#form_win").window('close');}
+    function  submitForm(){
+        $.messager.progress();	// display the progress bar
+
+        $('#ff').form('submit', {
+            url:'<%=basePath%>nav/save_nav.sc',
+                onSubmit: function(){
+            var isValid = $(this).form('validate');
+            if (!isValid){
+                $.messager.progress('close');	// hide progress bar while the form is invalid
+            }
+            return isValid;	// return false will stop the form submission
+        },
+        success: function(data){
+            var rs = eval('('+data+')');
+            if(rs.result=="success"){
+                $.messager.progress('close');	// hide progress bar while submit successfully
+                 window.location.reload();
+            }
+        }
+    });
+    }
 </script>
 </body>
 </html>
