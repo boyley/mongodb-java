@@ -63,7 +63,12 @@ public class NavigationServiceImpl implements INavigationService {
         Assert.notNull(navigation,"要添加的导航不能为空");
         Assert.hasText(navigation.getNavigationName(),"导航名称不能为空！");
         navigation.setCreateTime(new Date());
-        return navigationMapper.insertNavigation(navigation);
+        if(null != navigation.getId() && !"".equals(navigation.getId())){
+            return navigationMapper.updateNavigation(navigation);
+
+        }   else{
+            return navigationMapper.insertNavigation(navigation);
+        }
     }
 
     @Transactional(readOnly = true)
@@ -83,7 +88,6 @@ public class NavigationServiceImpl implements INavigationService {
     @Override
     public NavigationKeyword getNavigationKeywordById(String id) {
        // NavigationKeyword keyword = generateTree(id);
-
         return keywordMapper.selectByPrimaryKey(id);
     }
 

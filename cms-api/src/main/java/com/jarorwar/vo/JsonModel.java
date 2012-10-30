@@ -15,6 +15,7 @@ public class JsonModel<T> implements Serializable {
     private List<T> data;
     private int total;
     private List<T> rows;
+    private Object object;
 
     public int getTotal() {
         return total;
@@ -55,6 +56,15 @@ public class JsonModel<T> implements Serializable {
     public void setData(List<T> data) {
         this.data = data;
     }
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     public static class  JsonResult{
         public static final String FAILED ="failed";
         public static final String SUCCESS ="success";

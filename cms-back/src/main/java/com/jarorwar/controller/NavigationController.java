@@ -60,6 +60,18 @@ public class NavigationController  {
 
     }
 
+    @RequestMapping("/getById")
+    @ResponseBody
+    public Navigation getNavById(String id){
+        Navigation nav =null;
+        try {
+           nav = navigationService.getNavigationById(id);
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return nav;
+    }
+
     @RequestMapping("/save_nav")
     @ResponseBody
     public JsonModel saveNav(Navigation navigation) {

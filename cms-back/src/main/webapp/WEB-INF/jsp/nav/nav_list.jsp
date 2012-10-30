@@ -81,6 +81,7 @@
 <div id="form_win" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'">
     <div style="margin:10px">
         <form id="ff" method="post" action="<%=basePath%>/nav/save_nav.sc">
+            <input type="hidden" name="id">
             <table>
                 <tr>
                     <td>导航名称:</td>
@@ -104,7 +105,7 @@
                 </tr>
                 <tr>
                     <td>导航文本颜色RGB值:</td>
-                    <td><input class="easyui-validatebox" type="text" name="color" data-options="required:true,validType:'text'"/></td>
+                    <td><input class="easyui-validatebox" type="text" name="color" /></td>
                 </tr>
                 <tr>
                     <td>是否启用:</td>
@@ -119,11 +120,26 @@
         </form>
     </div>
     <div style="background:#f0f0f0;text-align:center;padding:5px">
-        <a href="javascript:void(0)" class="easyui-linkbutton" style="color:#ff0000;" onclick="submitForm()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" style="color:#ff0000;"  onclick="submitForm()">提交</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeWin()">关闭</a>
     </div>
 </div>
 <script type="text/javascript">
+    var $win;
+    $win = $('#form_win').window({
+        title:'添加导航',
+        width: 450,
+        height: 318,
+        top:($(window).height() - 400) * 0.5,
+        left:($(window).width() - 500) * 0.5,
+        shadow: true,
+        modal:true,
+        iconCls:'icon-add',
+        closed:true,
+        minimizable:false,
+        maximizable:false,
+        collapsible:false
+    });
     $.extend($.fn.validatebox.defaults.rules, {
         minLength: {
             validator: function(value, param){
@@ -136,10 +152,16 @@
     });
     function formatterUpdate(value ,row){
         if(value != null && $.trim(value) != ''){
-            return "<a href='javascript:void(0)' >编辑</a> ";
+            return "<a href='javascript:void(0)' onclick='showUpdateForm(\""+row.id+"\")'>编辑</a> ";
         }else{
             return "";
         }
+    }
+    function showUpdateForm(id){
+       /* $.getJSON("<%=basePath%>nav/getById.sc?id="+id,function(rs){
+        });*/
+        $win.window('open');
+        $('#ff').form('load', '<%=basePath%>nav/getById.sc?id='+id);
     }
     function formatterDel(value ,row){
         value = row.id;
@@ -173,22 +195,6 @@
     });
     });
     function openWin(){
-        var $win;
-        $win = $('#form_win').window({
-            title:'添加导航',
-            width: 450,
-            height: 318,
-            top:($(window).height() - 400) * 0.5,
-            left:($(window).width() - 500) * 0.5,
-            shadow: true,
-            modal:true,
-            iconCls:'icon-add',
-            closed:true,
-            minimizable:false,
-            maximizable:false,
-            collapsible:false
-        });
-
         $win.window('open');
     }
     function closeWin(){ $("#form_win").window('close');}

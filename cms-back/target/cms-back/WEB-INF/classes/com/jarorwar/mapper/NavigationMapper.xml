@@ -50,12 +50,12 @@
                 <if test="url !=null">
                      url = #{url} ,
                 </if>
-               <!-- <if test="hasChild !=null">
+             <if test="hasChild !=null">
                      has_child = #{hasChild},
                 </if>
                 <if test="linkOpenType !=null">
                      link_open_type = #{linkOpenType} ,
-                </if>-->
+                </if>
                 <if test="createTime !=null">
                      create_time = #{createTime} ,
                 </if>
