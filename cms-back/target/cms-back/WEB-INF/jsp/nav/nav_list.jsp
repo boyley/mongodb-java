@@ -89,7 +89,7 @@
                 </tr>
                 <tr>
                     <td>链接地址:</td>
-                    <td><input class="easyui-validatebox" type="text" name="url" data-options="required:true,validType:'url'" invalidMessage="请填写有效的Url地址"  missingMessage="必填内容"/></td>
+                    <td><input class="easyui-validatebox" type="text" name="url" data-options="required:true,validType:'text'" invalidMessage="请填写有效的Url地址"  missingMessage="必填内容"/></td>
                 </tr>
                 <tr>
                     <td>导航编号:</td>
@@ -181,7 +181,7 @@
 
     function formatterChild (value,row){
         if(row.hasChild) {
-            return "<a href='javascript:void(0);' onclick='alert(\"设置子导航\")' >设置子导航</a>"
+            return "<a href='<%=basePath%>nav/keyword_list.sc?navId="+row.id+"'>设置子导航</a>"
         } else{
             return "无子导航";
         }

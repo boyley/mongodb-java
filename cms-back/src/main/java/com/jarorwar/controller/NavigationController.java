@@ -1,7 +1,9 @@
 package com.jarorwar.controller;
 
 import com.jarorwar.model.Navigation;
+import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
+import com.jarorwar.service.INavigtaionKeywordService;
 import com.jarorwar.vo.JsonModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +38,8 @@ public class NavigationController  {
     }
     @Autowired
     private INavigationService navigationService;
+    @Autowired
+    private INavigtaionKeywordService keywordService;
     @RequestMapping("/list")
     public String listNavigations(Model model){
         return "nav/nav_list";
@@ -143,4 +149,25 @@ public class NavigationController  {
         }
 
     }
+
+    @RequestMapping("/keyword_list")
+    public String keyWordList(String navId,ModelMap modelMap) throws Exception {
+        Navigation navigation = navigationService.getNavigationById(navId);
+        modelMap.put("navigation",navigation);
+       return "nav/keyword_list";
+    }
+
+    @RequestMapping("/keywords")
+    @ResponseBody
+    public  JsonModel getKeywordsByNavId(String navId){
+       JsonModel jm = new JsonModel();
+        jm.setTotal(10);
+        List<NavigationKeyword> rows = new ArrayList<NavigationKeyword>();
+        rows = keywordService.getRootNavigationKeywords(new Integer(1),navId);
+        jm.setRows(rows);
+        return  jm;
+    }
+
+
+
 }

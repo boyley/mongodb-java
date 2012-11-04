@@ -81,7 +81,7 @@ public class NavigationServiceImpl implements INavigationService {
     @Transactional(readOnly = true)
     @Override
     public List<NavigationKeyword> getRootNavigationKeywords(Integer keywordType, String channelId) {
-        return keywordMapper.getRootNavigationKeywords(keywordType,channelId);
+        return keywordMapper.getRootNavigationKeywords(keywordType,channelId,null);
     }
 
     @Transactional(readOnly = true)

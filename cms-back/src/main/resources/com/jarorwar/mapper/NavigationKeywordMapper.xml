@@ -11,19 +11,31 @@
     <result column="link_open_type" property="linkOpenType" jdbcType="TINYINT" />
     <result column="keyword_name" property="keywordName" jdbcType="VARCHAR" />
     <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="parent_id" property="_parentId" jdbcType="VARCHAR" />
+
     <association property="parentKeyword" column="parent_id" select="com.jarorwar.mapper.NavigationKeywordMapper.selectByPrimaryKey"/>
     <association property="navigation" column="navigation_id" select="com.jarorwar.mapper.NavigationMapper.getById"/>
-    <collection property="subKeywords" javaType="ArrayList"
-                column="parent_id" ofType="com.jarorwar.model.NavigationKeyword" select="com.jarorwar.mapper.NavigationKeywordMapper.selectByParentId"/>
+   <!-- <collection property="subKeywords" javaType="ArrayList"
+                column="parent_id" ofType="com.jarorwar.model.NavigationKeyword" select="com.jarorwar.mapper.NavigationKeywordMapper.selectByParentId"/>-->
   </resultMap>
   <sql id="Base_Column_List" >
     id, url, navigation_id, order_sn, is_display, create_time, parent_id, keyword_type, 
-    link_open_type, keyword_name, color
+    link_open_type, keyword_name, color  ,parent_id
   </sql>
   <select id="getRootNavigationKeywords" resultMap="NavigationKeywordResultMap">
       select
       <include refid="Base_Column_List" />
-      from tbl_cms_navigation_keyword where parent_id is null and keyword_type = #{keywordType} and   navigation_id = #{navId} order by order_sn asc
+      from tbl_cms_navigation_keyword where parent_id is null
+      <if test="keywordType != null">
+          and keyword_type = #{keywordType}
+      </if>
+      <if test="navId != null">
+          and   navigation_id = #{navId}
+      </if>
+      <if test="display != null">
+          and is_display = #{display}
+      </if>
+      order by order_sn asc
   </select>
   <select id="selectByParentId" resultMap="NavigationKeywordResultMap" parameterType="java.lang.String" >
     select

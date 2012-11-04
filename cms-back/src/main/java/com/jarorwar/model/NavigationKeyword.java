@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public class NavigationKeyword implements Serializable{
-    public static final Integer KEYWORD_TYPE_KEYWORD = 0;
+    public static final Integer KEYWORD_TYPE_KEYWORD = 1;
 
-    public static final Integer KEYWORD_TYPE_CAT = 1;
+    public static final Integer KEYWORD_TYPE_CAT = 0;
     private String id;
 
     private String url;
@@ -24,7 +24,7 @@ public class NavigationKeyword implements Serializable{
     private List<NavigationKeyword> subKeywords = new ArrayList<NavigationKeyword>();
     private NavigationKeyword parentKeyword;
     /**
-     * 关键字类型：0 - 关键字; 1 - 分类
+     * 关键字类型： 1- 关键字;  0- 分类
      */
     private Integer keywordType;
 
@@ -33,6 +33,8 @@ public class NavigationKeyword implements Serializable{
     private String keywordName;
 
     private String color;
+
+
 
     public String getId() {
         return id;
@@ -132,6 +134,15 @@ public class NavigationKeyword implements Serializable{
         this.parentKeyword = parentKeyword;
     }
 
+    private String _parentId;
+
+    public String get_parentId() {
+        return _parentId;
+    }
+
+    public void set_parentId(String _parentId) {
+        this._parentId = _parentId;
+    }
     @Override
     public String toString() {
         return "NavigationKeyword{" +
