@@ -1,0 +1,27 @@
+body {
+    font-size: 10pt;
+}
+.listView th {
+    font: bold 12px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #4f6b72;
+    border: 1px solid #97c8ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 11px;
+    background: #b9e6fd  no-repeat;
+}
+.listView tr {
+    background-color:expression(this.rowIndex%2==0 ? "#F8F8F8":"#95bce2");
+    cursor:hand;
+}
+.listView td {
+    border: 1px solid #97c8ff;
+    font-size:12px;
+    color: #4f6b72;
+    padding: 6px 11px;
+    border-bottom: 1px solid #95bce2;
+}
+tr.over td {
+    background: #cccccc;
+}

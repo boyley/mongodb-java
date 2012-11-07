@@ -27,4 +27,9 @@ public class NavigtaionKeywordServiceImpl implements INavigtaionKeywordService {
         navigationKeywords.addAll(subKeywords);
         return navigationKeywords;
     }
+
+    @Override
+    public List<NavigationKeyword> getAllCateByDisplay(Integer display) {
+        return keywordMapper.getCateByDisplay(display);
+    }
 }

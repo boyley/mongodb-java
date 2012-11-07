@@ -51,7 +51,7 @@
                         <bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>
                     </property>
                 </bean>-->
-                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+                <!--<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>-->
                 <!--<bean class="net.shopin.web.view.JSONRPCView"/>
                 <bean class="net.shopin.web.view.AtomView"/>
                 <bean class="net.shopin.web.view.RssView"/>-->

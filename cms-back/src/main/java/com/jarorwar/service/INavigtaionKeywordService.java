@@ -12,4 +12,10 @@ public interface INavigtaionKeywordService {
      * @return
      */
     List<NavigationKeyword> getRootNavigationKeywords(Integer display,String navigationId);
+
+    /**
+     * 获取所有的类别
+     * @return
+     */
+    List<NavigationKeyword> getAllCateByDisplay(Integer display);
 }

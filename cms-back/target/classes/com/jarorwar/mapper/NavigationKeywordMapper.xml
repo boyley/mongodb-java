@@ -22,6 +22,14 @@
     id, url, navigation_id, order_sn, is_display, create_time, parent_id, keyword_type, 
     link_open_type, keyword_name, color  ,parent_id
   </sql>
+  <select id="getCateByDisplay" resultMap="NavigationKeywordResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from tbl_cms_navigation_keyword where parent_id is null  and keyword_type = 0
+      <if test="display != null">
+          and is_display =#{display}
+      </if>
+  </select>
   <select id="getRootNavigationKeywords" resultMap="NavigationKeywordResultMap">
       select
       <include refid="Base_Column_List" />

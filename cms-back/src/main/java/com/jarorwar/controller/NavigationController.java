@@ -167,7 +167,28 @@ public class NavigationController  {
         jm.setRows(rows);
         return  jm;
     }
+    @RequestMapping("/save_keyword")
+    @ResponseBody
+    public JsonModel saveOrUpdate(NavigationKeyword keyword){
+        JsonModel jm = new JsonModel();
+        System.out.println(keyword);
+        return jm;
+    }
 
+    @RequestMapping("/to_add_or_edit_form")
+    public String toAddForm(ModelMap modelMap,String id){
+        List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null);
+        modelMap.put("cateList",cates);
+        return "nav/add_or_edit_keyword";
+    }
+
+    @RequestMapping("/getAllKeywordCate")
+    @ResponseBody
+    public JsonModel getAllKeywordCate(){
+        JsonModel jm = new JsonModel();
+        jm.setData(keywordService.getAllCateByDisplay(null));
+        return jm;
+    }
 
 
 }
