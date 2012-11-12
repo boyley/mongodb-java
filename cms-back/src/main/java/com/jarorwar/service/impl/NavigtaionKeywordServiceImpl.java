@@ -3,6 +3,7 @@ package com.jarorwar.service.impl;
 import com.jarorwar.mapper.NavigationKeywordMapper;
 import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigtaionKeywordService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +28,14 @@ public class NavigtaionKeywordServiceImpl implements INavigtaionKeywordService {
         navigationKeywords.addAll(subKeywords);
         return navigationKeywords;
     }
+    @Transactional(readOnly = true)
+    @Override
+    public List<NavigationKeyword> getAllCateByDisplay( Integer display, String navId) {
+        return keywordMapper.getCateByDisplay(display,navId);
+    }
 
     @Override
-    public List<NavigationKeyword> getAllCateByDisplay(Integer display) {
-        return keywordMapper.getCateByDisplay(display);
+    public int addKeyWord(NavigationKeyword keyword) {
+        return keywordMapper.insert(keyword) ;
     }
 }

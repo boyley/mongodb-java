@@ -51,19 +51,21 @@
                 </tr>
                 <tr>
                     <td>链接打开方式:</td>
-                    <td> <select class="easyui-combobox" name="linkOpenType"><option value="1">原窗口</option><option value="0">新窗口</option></select></td>
+                    <td> <select class="easyui-combobox" name="linkOpenType"><option value="1"  data-options="panelHeight: 'auto' ">原窗口</option><option value="0">新窗口</option></select></td>
                 </tr>
                 <tr>
                     <td>类型:</td>
-                    <td> <select class="easyui-combobox" name="keywordType"><option value="1">关键字</option><option value="0">类别</option></select></td>
+                    <td> <select class="easyui-combobox" name="keywordType"  data-options="panelHeight: 'auto' "><option value="1">关键字</option><option value="0">类别</option></select></td>
                 </tr>
                 <tr>
                     <td>是否启用:</td>
-                    <td> <select class="easyui-combobox" name="display"><option value="1">显示</option><option value="0">不显示</option></select></td>
+                    <td> <select class="easyui-combobox" name="display" data-options="panelHeight: 'auto' "><option value="1">显示</option><option value="0">不显示</option></select></td>
                 </tr>
                 <tr>
                     <td>类别选择:</td>
-                    <td> <select class="easyui-combobox" id="parent_id" name="parentKeyword.id"></select></td>
+                    <td> <input class="easyui-combobox" id="parentKeyword_id" name="parentKeyword.id"
+                                data-options="valueField:'id',textField:'keywordName', panelHeight: 'auto' ">
+                        </td>
                 </tr>
             </table>
         </form>
@@ -74,11 +76,10 @@
     </div>
 </div>
 <script type="text/javascript">
-    function getAllCate(){
-        var url ='<%=basePath%>nav/getAllKeywordCate.sc';
-        $.getJSON(url,function(rs){
-            alert(rs);
-        })
+    function initFormData(obj){
+        var url ='<%=basePath%>nav/getAllKeywordCate.sc?navId=${navigation.id}';
+           $("#parentKeyword_id").combobox('reload',url);
+        alert(obj.id);
     }
     function  submitForm(){
         $.messager.progress();	// display the progress bar
@@ -117,7 +118,8 @@
         collapsible:false
     });
     function formatterUpdate(rowIndex, rowData){
-        return "<a href='javascript:void(0)' id='"+rowIndex+"' onclick='javascript:$win.window(\"open\");getAllCate();'>编辑</a><a href='javascript:void(0)' onclick='saveChanges(\""+rowData+rowIndex+"\")' style='display: block;'>保存</a> ";
+        var o = rowData;
+        return "<a href='javascript:void(0)' id='"+rowIndex+"' onclick='javascript:$win.window(\"open\");initFormData("+ o.id+");'>编辑</a><a href='javascript:void(0)' onclick='saveChanges(\""+rowData+rowIndex+"\")' style='display: block;'>保存</a> ";
     }
 
 

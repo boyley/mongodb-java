@@ -163,7 +163,7 @@ public class NavigationController  {
        JsonModel jm = new JsonModel();
         jm.setTotal(10);
         List<NavigationKeyword> rows = new ArrayList<NavigationKeyword>();
-        rows = keywordService.getRootNavigationKeywords(new Integer(1),navId);
+        rows = keywordService.getRootNavigationKeywords(null,navId);
         jm.setRows(rows);
         return  jm;
     }
@@ -171,23 +171,26 @@ public class NavigationController  {
     @ResponseBody
     public JsonModel saveOrUpdate(NavigationKeyword keyword){
         JsonModel jm = new JsonModel();
+        keywordService.addKeyWord(keyword);
         System.out.println(keyword);
         return jm;
     }
 
     @RequestMapping("/to_add_or_edit_form")
     public String toAddForm(ModelMap modelMap,String id){
-        List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null);
+        List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null,null);
         modelMap.put("cateList",cates);
+        modelMap.put("navId",id);
         return "nav/add_or_edit_keyword";
     }
 
     @RequestMapping("/getAllKeywordCate")
     @ResponseBody
-    public JsonModel getAllKeywordCate(){
-        JsonModel jm = new JsonModel();
-        jm.setData(keywordService.getAllCateByDisplay(null));
-        return jm;
+    public List<NavigationKeyword> getAllKeywordCate(String navId){
+        //JsonModel jm = new JsonModel();
+        //jm.setData(keywordService.getAllCateByDisplay(null));
+        //return jm;
+        return keywordService.getAllCateByDisplay(null,navId);
     }
 
 

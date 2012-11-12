@@ -17,5 +17,7 @@ public interface INavigtaionKeywordService {
      * 获取所有的类别
      * @return
      */
-    List<NavigationKeyword> getAllCateByDisplay(Integer display);
+    List<NavigationKeyword> getAllCateByDisplay(Integer display, String navId);
+
+    int addKeyWord(NavigationKeyword keyword);
 }

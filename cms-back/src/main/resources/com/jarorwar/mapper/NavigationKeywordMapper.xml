@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jarorwar.mapper.NavigationKeywordMapper" >
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
   <resultMap id="NavigationKeywordResultMap" type="com.jarorwar.model.NavigationKeyword" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
@@ -29,6 +30,10 @@
       <if test="display != null">
           and is_display =#{display}
       </if>
+      <if test="navId != null">
+          and navigation_id =#{navId}
+      </if>
+
   </select>
   <select id="getRootNavigationKeywords" resultMap="NavigationKeywordResultMap">
       select

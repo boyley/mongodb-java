@@ -16,5 +16,5 @@ public interface NavigationKeywordMapper {
     List<NavigationKeyword> selectByParentId(String id);
     int updateByPrimaryKey(NavigationKeyword record);
     List<NavigationKeyword> getRootNavigationKeywords(@Param(value = "keywordType")Integer keywordType, @Param(value = "navId")String navId,@Param("display")Integer display);
-    List<NavigationKeyword> getCateByDisplay(Integer display);
+    List<NavigationKeyword> getCateByDisplay(@Param("display")Integer display,@Param("navId")String navId);
 }

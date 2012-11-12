@@ -143,11 +143,13 @@ public class NavigationKeyword implements Serializable{
     public void set_parentId(String _parentId) {
         this._parentId = _parentId;
     }
+
     @Override
     public String toString() {
         return "NavigationKeyword{" +
                 "id='" + id + '\'' +
                 ", url='" + url + '\'' +
+                ", navigation=" + navigation +
                 ", orderSn=" + orderSn +
                 ", isDisplay=" + isDisplay +
                 ", createTime=" + createTime +
@@ -157,6 +159,7 @@ public class NavigationKeyword implements Serializable{
                 ", linkOpenType=" + linkOpenType +
                 ", keywordName='" + keywordName + '\'' +
                 ", color='" + color + '\'' +
+                ", _parentId='" + _parentId + '\'' +
                 '}';
     }
 }
