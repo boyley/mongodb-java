@@ -4,6 +4,7 @@ import com.jarorwar.model.Navigation;
 import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigationService;
 import com.jarorwar.service.INavigtaionKeywordService;
+import com.jarorwar.utils.StringUtils;
 import com.jarorwar.vo.JsonModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -178,8 +179,16 @@ public class NavigationController  {
     }
 
     @RequestMapping("/to_add_or_edit_form")
-    public String toAddForm(ModelMap modelMap,String navId){
+    public String toAddForm(ModelMap modelMap,String navId,String id){
         List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null,navId);
+        NavigationKeyword keyword = null;
+        if(StringUtils.isNotBlank(id)){
+           keyword = keywordService.getById(StringUtils.trim(id));
+        }
+        if(keyword == null){
+            keyword = new NavigationKeyword();
+        }
+        modelMap.put("keyword",keyword);
         modelMap.put("cateList",cates);
         modelMap.put("navId",navId);
         return "nav/add_or_edit_keyword";

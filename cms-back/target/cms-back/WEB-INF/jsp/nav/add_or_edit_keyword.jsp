@@ -38,7 +38,7 @@
         <table border="0px" style="font-size:12px" width="630px">
             <tr>
                 <td align="right">* 导航关键字名称:</td>
-                <td><input type="text" id="keywordName" name="keywordName" style="width:160px"/></td>
+                <td><input type="text" id="keywordName" name="keywordName" style="width:160px" value="${keyword.keywordName}"/></td>
                 <td>
                     <div id="keywordNameTip" style="width:280px"></div>
                 </td>
@@ -52,7 +52,7 @@
 
             <tr>
                 <td align="right">* 链接地址:</td>
-                <td><input type="text" id="url" name="url" style="width:160px" value="#"/></td>
+                <td><input type="text" id="url" name="url" style="width:160px"  value="${keyword.url}"/></td>
                 <td>
                     <div id="urlTip" style="width:280px"></div>
                 </td>
@@ -65,7 +65,7 @@
             </tr>
             <tr>
                 <td align="right">导航文字颜色:</td>
-                <td><input type="text" id="color" name="color" style="width:160px" value=""/></td>
+                <td><input type="text" id="color" name="color" style="width:160px" value="${keyword.color}"/></td>
                 <td>
                     <div id="colorTip" style="width:280px"></div>
                 </td>
@@ -78,15 +78,15 @@
             </tr>
             <tr>
                 <td align="right">排序号:</td>
-                <td><input type="text" id="orderSn" name="orderSn" style="width:160px" value=""/></td>
+                <td><input type="text" id="orderSn" name="orderSn" style="width:160px" value="${keyword.orderSn}"/></td>
                 <td>
                     <div id="orderSnTip" style="width:280px"></div>
                 </td>
             </tr>
             <tr>
                 <td align="right">链接打开方式:</td>
-                <td><input type="radio" id="linkOpenType_new" value="1" name="linkOpenType" checked="true"/>
-                    原窗口&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="linkOpenType_org" value="2" name="linkOpenType" />
+                <td><input type="radio" id="linkOpenType_new" value="1" name="linkOpenType" <c:if test="${keyword.linkOpenType == 1}">checked="true" </c:if>/>
+                    原窗口&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="linkOpenType_org" <c:if test="${keyword.linkOpenType == 0}">checked="true" </c:if> name="linkOpenType" />
                     新窗口</td>
                 <td>
                     <div id="linkOpenTypeTip" style="width:280px"></div>

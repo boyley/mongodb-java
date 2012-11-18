@@ -120,7 +120,7 @@
     });
     function formatterUpdate(rowIndex, rowData){
         var o = rowData;
-        return "<a href='javascript:void(0)' id='"+rowIndex+"' onclick='javascript:$win.window(\"open\");initFormData("+ o.id+");'>编辑</a>" +
+        return "<a href='/nav/to_add_or_edit_form.sc?id="+o.id+"&navId="+ o.navigation.id+"'>编辑</a>" +
                 "|<a href='javascript:void(0)' onclick='deleteById(\""+rowIndex+"\")'>删除</a> ";
     }
 

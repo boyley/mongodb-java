@@ -22,4 +22,5 @@ public interface INavigtaionKeywordService {
     int addKeyWord(NavigationKeyword keyword);
 
     public int deleteKeyword(String id);
+    public NavigationKeyword getById(String id);
 }

@@ -42,4 +42,9 @@ public class NavigtaionKeywordServiceImpl implements INavigtaionKeywordService {
     public int deleteKeyword(String id){
       return keywordMapper.deleteByPrimaryKey(id);
     }
+
+    public NavigationKeyword getById(String id){
+        return keywordMapper.selectByPrimaryKey(id);
+    }
+
 }
