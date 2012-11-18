@@ -20,4 +20,6 @@ public interface INavigtaionKeywordService {
     List<NavigationKeyword> getAllCateByDisplay(Integer display, String navId);
 
     int addKeyWord(NavigationKeyword keyword);
+
+    public int deleteKeyword(String id);
 }

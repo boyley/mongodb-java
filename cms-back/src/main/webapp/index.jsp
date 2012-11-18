@@ -289,7 +289,7 @@ $(function() {
 <div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
     <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
         <div title="欢迎使用" style="padding:20px;overflow:hidden; color:red; " >
-            <a href="http://www.jarorwar.com" target="_blank">我的博客</a>
+            <a href="http://www.jarorwar.com" target="_blank"><h1>visit..</h1>我的博客</a>
         </div>
     </div>
 </div>

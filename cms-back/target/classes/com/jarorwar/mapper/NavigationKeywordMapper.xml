@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jarorwar.mapper.NavigationKeywordMapper" >
-    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+  <!--  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
   <resultMap id="NavigationKeywordResultMap" type="com.jarorwar.model.NavigationKeyword" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
   <select id="getCateByDisplay" resultMap="NavigationKeywordResultMap">
       select
       <include refid="Base_Column_List" />
-      from tbl_cms_navigation_keyword where parent_id is null  and keyword_type = 0
+      from tbl_cms_navigation_keyword where (parent_id is null or parent_id = '')  and keyword_type = 0
       <if test="display != null">
           and is_display =#{display}
       </if>
@@ -38,7 +38,7 @@
   <select id="getRootNavigationKeywords" resultMap="NavigationKeywordResultMap">
       select
       <include refid="Base_Column_List" />
-      from tbl_cms_navigation_keyword where parent_id is null
+      from tbl_cms_navigation_keyword where (parent_id is null or parent_id = '')
       <if test="keywordType != null">
           and keyword_type = #{keywordType}
       </if>

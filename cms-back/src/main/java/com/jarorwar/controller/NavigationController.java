@@ -168,19 +168,20 @@ public class NavigationController  {
         return  jm;
     }
     @RequestMapping("/save_keyword")
-    @ResponseBody
-    public JsonModel saveOrUpdate(NavigationKeyword keyword){
+    public String  saveOrUpdate(NavigationKeyword keyword) throws Exception {
         JsonModel jm = new JsonModel();
+        if("0".equals(keyword.getKeywordType())){
+            keyword.setParentKeyword(null);
+        }
         keywordService.addKeyWord(keyword);
-        System.out.println(keyword);
-        return jm;
+        return "redirect:/nav/keyword_list.sc?navId="+keyword.getNavigation().getId();
     }
 
     @RequestMapping("/to_add_or_edit_form")
-    public String toAddForm(ModelMap modelMap,String id){
-        List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null,null);
+    public String toAddForm(ModelMap modelMap,String navId){
+        List<NavigationKeyword> cates = keywordService.getAllCateByDisplay(null,navId);
         modelMap.put("cateList",cates);
-        modelMap.put("navId",id);
+        modelMap.put("navId",navId);
         return "nav/add_or_edit_keyword";
     }
 
@@ -191,6 +192,16 @@ public class NavigationController  {
         //jm.setData(keywordService.getAllCateByDisplay(null));
         //return jm;
         return keywordService.getAllCateByDisplay(null,navId);
+    }
+
+
+    @RequestMapping("/delete_keyword_by_id")
+    @ResponseBody
+    public JsonModel deleteKeyWordById(String id){
+        JsonModel jm = new JsonModel();
+        keywordService. deleteKeyword(id);
+        jm.setResult(JsonModel.JsonResult.SUCCESS);
+        return jm;
     }
 
 

@@ -25,7 +25,7 @@
     </thead>
 </table>
 <div id="toolbar">
-    <a href="/nav/to_add_or_edit_form.sc" class="easyui-linkbutton" iconCls="icon-add" plain="true"  >新增</a>
+    <a href="/nav/to_add_or_edit_form.sc?navId=${navigation.id}" class="easyui-linkbutton" iconCls="icon-add" plain="true"  >新增</a>
     <%--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="saveChanges()">Save</a>--%>
 </div>
 <div id="form_win" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'">
@@ -76,6 +76,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    var navId = '${navigation.id}';
     function initFormData(obj){
         var url ='<%=basePath%>nav/getAllKeywordCate.sc?navId=${navigation.id}';
            $("#parentKeyword_id").combobox('reload',url);
@@ -119,7 +120,8 @@
     });
     function formatterUpdate(rowIndex, rowData){
         var o = rowData;
-        return "<a href='javascript:void(0)' id='"+rowIndex+"' onclick='javascript:$win.window(\"open\");initFormData("+ o.id+");'>编辑</a><a href='javascript:void(0)' onclick='saveChanges(\""+rowData+rowIndex+"\")' style='display: block;'>保存</a> ";
+        return "<a href='javascript:void(0)' id='"+rowIndex+"' onclick='javascript:$win.window(\"open\");initFormData("+ o.id+");'>编辑</a>" +
+                "|<a href='javascript:void(0)' onclick='deleteById(\""+rowIndex+"\")'>删除</a> ";
     }
 
 
@@ -133,6 +135,21 @@
     ];
     function showUpdateForm(id)   {
 
+    }
+
+    function deleteById(index){
+        var target = $('#dg').treegrid('selectRow', index);
+        if($('#dg').treegrid('getChildren', index).length<=0){
+             $.getJSON("/nav/delete_keyword_by_id.sc",{"id":$('#dg').treegrid('getSelected').id},function(rs){
+             if(rs.result == 'success'){
+             alert('删除成功！');
+             window.location.reload();
+             }
+             });
+        }  else{
+            alert("不是叶子节点，不能删除");
+            return false;
+        }
     }
 
 </script>

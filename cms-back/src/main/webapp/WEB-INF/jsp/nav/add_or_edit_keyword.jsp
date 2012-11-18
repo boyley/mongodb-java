@@ -15,8 +15,18 @@
             $("#url").formValidator({onShowFixText:$("#urlFixTip").text(), onShowText:"请输入url", onShow:"输入正确url", onCorrect:"输入正确"}).inputValidator({min:1, onError:"输入的url不能为空"});
             $("#color").formValidator({onShowFixText:$("#colorFixTip").text()});
             $("#orderSn").formValidator({onShow:"请输入正整数", onCorrect:"排序号输入正确"}).regexValidator({regExp:"intege1", dataType:"enum", onError:"排序号只能输入正整数"});
+            $("#keywordType").formValidator({onShow:"请选择类型",onFocus:"类型必须选择",onCorrect:"正确",defaultValue:"1"}).inputValidator({min:1,onError: "请选择学历"}).defaultPassed();
 
         });
+        function hiddenCate(){
+            var keyType = $("#keywordType").val();
+            if(keyType == 0){
+                $("#pidtr").css("display","none");
+            }else if(keyType ==1){
+                $("#pidtr").removeAttr("style");
+            }
+
+        }
     </script>
 
 </head>
@@ -85,7 +95,8 @@
             <tr>
                 <td align="right">类型:</td>
                 <td >
-                    <select  name="keywordType"  id="keywordType" style="width: 150px;height:22px;vertical-align: middle;">
+                    <select  name="keywordType"  id="keywordType" style="width: 150px;height:22px;vertical-align: middle;" onchange="hiddenCate()">
+                        <option value="">选择类型</option>
                         <option value="1">关键字</option><option value="0">类别</option></select>
                 </td>
                 <td>
@@ -99,10 +110,15 @@
                     <div id="displayTypeTip" style="width:280px"></div>
                 </td>
             </tr>
-            <tr style="display: none;">
+            <tr id="pidtr">
                 <td align="right">父类别选择:</td>
                 <td>
-                    <select name="parentKeyword.id" id="pid"  style="width: 150px;height:22px;vertical-align: middle;"></select>
+                    <select name="parentKeyword.id" id="pid"  style="width: 150px;height:22px;vertical-align: middle;">
+                        <option value="" >选择父类别</option>
+                        <c:forEach var="cate" items="${cateList}">
+                            <option value="${cate.id}">${cate.keywordName}</option>
+                         </c:forEach>
+                    </select>
                 </td>
                 <td>
                     <div id="pidTip" style="width:280px"></div>

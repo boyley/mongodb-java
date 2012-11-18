@@ -38,4 +38,8 @@ public class NavigtaionKeywordServiceImpl implements INavigtaionKeywordService {
     public int addKeyWord(NavigationKeyword keyword) {
         return keywordMapper.insert(keyword) ;
     }
+
+    public int deleteKeyword(String id){
+      return keywordMapper.deleteByPrimaryKey(id);
+    }
 }
