@@ -7,7 +7,7 @@
     <link type="text/css" href="/css/demo.css">
 </head>
 <body>
-<table id="dg" title="设置【${navigation.navigationName}】自导航" class="easyui-treegrid" style="height: 560px;"
+<table id="dg" title="设置【${navigation.navigationName}】子导航" class="easyui-treegrid" style="height: 560px;"
        toolbar="#toolbar"      data-options="url:'<%=basePath%>nav/keywords.sc?navId=${navigation.id}',idField:'id',treeField:'keywordName',iconCls:'icon-edit',
 					rownumbers:true,pagination:false,fitColumns:true,autoRowHeight:false">
     <thead>
@@ -27,6 +27,7 @@
 <div id="toolbar">
     <a href="/nav/to_add_or_edit_form.sc?navId=${navigation.id}" class="easyui-linkbutton" iconCls="icon-add" plain="true"  >新增</a>
     <%--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="saveChanges()">Save</a>--%>
+    <span style="float:right;"><a href="/nav/list.sc" style="margin-right: 20px"  class="easyui-linkbutton"  iconCls="icon icon-undo">返回导航列表页</a></span>
 </div>
 <div id="form_win" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'">
     <div style="margin:10px">

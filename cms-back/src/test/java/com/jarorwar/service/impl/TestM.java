@@ -2,6 +2,8 @@ package com.jarorwar.service.impl;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -12,21 +14,21 @@ import java.util.UUID;
  * To change this template use File | Settings | File Templates.
  */
 public class TestM {
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        for(int i=0;i<100000;i++){
-            getId();
-        }
-        System.out.println(System.currentTimeMillis()-start);
-    }
-
-
     @Test
     public void teast(){
         System.out.println('a');
     }
 
-    public static String getId(){
-        return UUID.randomUUID().toString().replaceAll("-","").toLowerCase();
+    private List<Pictures> getPicList(){
+         List<Pictures> pictureses =new ArrayList<Pictures>();
+        for(int i=0;i<7;i++){
+            Pictures pictures =new Pictures();
+            pictures.setCommodityNo("112233");
+            pictures.setImageName("112233-"+(i+1));
+            pictures.setPath("/img/");
+            pictures.setType("b");
+        }
+        return pictureses;
     }
+
 }

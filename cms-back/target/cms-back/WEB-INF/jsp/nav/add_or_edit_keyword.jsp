@@ -35,6 +35,7 @@
     <legend>导航关键字</legend>
     <form action="save_keyword.sc" method="post" name="form1" id="form1">
         <input type="hidden" name="navigation.id" value="${navId}">
+        <input type="hidden" name="id" value="${keyword.id}">
         <table border="0px" style="font-size:12px" width="630px">
             <tr>
                 <td align="right">* 导航关键字名称:</td>
@@ -127,7 +128,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" name="button" id="button" value="提交"/> &nbsp;  &nbsp;  &nbsp;  &nbsp; <input type="reset" name="button" id="rst" value="重置"/>
+                    <input type="submit" name="button" id="button" value="提交"/> &nbsp;  &nbsp; <input type="reset" name="button" id="rst" value="重置"/> &nbsp;&nbsp; <a href="/nav/keyword_list.sc?navId=${navId}" style="text-decoration: none">返回</a>
                 </td>
                 <td>
                 </td>

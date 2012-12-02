@@ -3,6 +3,7 @@ package com.jarorwar.service.impl;
 import com.jarorwar.mapper.NavigationKeywordMapper;
 import com.jarorwar.model.NavigationKeyword;
 import com.jarorwar.service.INavigtaionKeywordService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,11 @@ public class NavigtaionKeywordServiceImpl implements INavigtaionKeywordService {
 
     @Override
     public int addKeyWord(NavigationKeyword keyword) {
-        return keywordMapper.insert(keyword) ;
+        if(StringUtils.isNotBlank(keyword.getId())){
+            return keywordMapper.updateByPrimaryKey(keyword) ;
+        }else{
+            return keywordMapper.insert(keyword) ;
+        }
     }
 
     public int deleteKeyword(String id){
